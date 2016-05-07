@@ -1,0 +1,157 @@
+<section class="row administrator-product-edit">
+    <div class="container">
+
+        <h2>Редактирование товара</h2>
+
+        <!-- ============== Главная информация о товаре ================= -->
+        <form class="product-details" action="" method="post">
+            <div class="info">
+                <h3>О товаре</h3>
+                <div class="block">
+                    <img src="<?php echo $data['product']['image'] ?>" alt="<?php echo $data['product']['caption'] ?>" />
+                    <div class="details">
+                        <p><b>ID: </b><?php echo $data['product']['product_id'] ?><input type="hidden" name="product_id" value="<?php echo $data['product']['product_id'] ?>"></p>
+                        <p><b>Название: </b><input type="text" name="caption" value="<?php echo $data['product']['caption'] ?>"></p>
+                        <p><b>URL Картинки: </b><input type="text" name="image" value="<?php echo $data['product']['image'] ?>"></p>
+                        <p><b>Цена: </b><input type="text" name="price" value="<?php echo $data['product']['price'] ?>"></p>
+                        <p><b>Поставщик: </b>
+                            <select name="provider_id">
+                                <option value="<?php echo $data['product']['provider_id'] ?>" selected><?php
+
+                                $current_id = $data['product']['provider_id'] - 1;
+                                echo $data['providers'][$current_id]['name']
+
+                                ?></option>
+
+                                <?php
+                                    foreach($data['providers'] as $provider) {
+                                        if ($data['product']['provider_id'] != $provider['provider_id']) {
+                                            echo '<option value="'.$provider['provider_id'].'">'.$provider['name'].'</option>';
+                                        }
+                                    }
+                                ?>
+
+                            </select>
+                        </p>
+                        <p><b>Опубликован: </b><input type="checkbox" name="is_published" <?php if($data['product']['is_published']) echo "checked"?>></p>
+                    </div>
+                </div>
+
+                <div class="block">
+                    <h4>Краткое описание товара</h4>
+                    <textarea name="short_description"><?php echo $data['product']['short_description'] ?></textarea>
+                </div>
+
+                <div class="block">
+                    <h4>Полное описание товара</h4>
+                    <textarea name="long_description"><?php echo $data['product']['long_description'] ?></textarea>
+                </div>
+
+                <div class="block">
+                    <input type="submit" value="Сохранить изменения">
+                </div>
+            </div>
+        </form>
+
+        <!-- ================= Категории товара ==================== -->
+
+        <form action="" method="post">
+            <form class="product-categories" action="" method="post">
+                <h3>Категории товара</h3>
+                <table rules="none">
+                    <tr>
+                        <th>Название категории</th>
+                        <th>&#160</th>
+                    </tr>
+
+                    <?php
+                        for($i = count($data['product_categories']), $k = 0; $k < $i; $k++){
+                            $class = $k % 2;
+                            $class = "row-".$class;
+
+                            echo '
+                                <tr class="'.$class.'">
+                                    <td>'.$data['product_categories'][$k]['name'].'</td>
+                                    <td><a href="/administrator/products/edit/'.$data['product']['product_id'].'/deleteCategory/'.$data['product_categories'][$k]['category_id'].'">Удалить</a></td>
+                                </tr>
+                            ';
+                        }
+                    ?>
+
+                    <tr>
+                        <td>
+                            <select name="add_to_category">
+                                <option>Выберите категорию</option>
+
+                                <?php
+                                    foreach($data['categories'] as $categories) {
+                                        echo '
+                                            <option value="'.$categories['category_id'].'">'.$categories['name'].'</option>
+                                        ';
+                                    }
+                                ?>
+
+                            </select>
+                        </td>
+                        <td>
+                            <input type="submit" value="Добавить категорию">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </form>
+
+        <!-- ================= Полные х-ки товара ==================== -->
+
+        <form class="product-features" action="" method="post">
+            <h3>Подробные характеристики</h3>
+            <table rules="none">
+                <tr>
+                    <th>Характеристика</th>
+                    <th>Значение</th>
+                </tr>
+
+                <?php
+
+                    for($i = count($data['product_features']), $k = 0; $k < $i; $k++){
+                        $class = $k % 2;
+                        $class = "row-".$class;
+
+                        echo '
+                            <tr class="'.$class.'">
+                                <td>'.$data['product_features'][$k]['name'].'</td>
+                                <td>'.$data['product_features'][$k]['value'].'</td>
+                                <td><a href="/administrator/products/edit/'.$data['product']['product_id'].'/deleteFeature/'.$data['product_features'][$k]['feature_id'].'">Удалить</a></td>
+                            </tr>
+                        ';
+                    }
+
+                ?>
+
+                <tr>
+                    <td>
+                        <select name="add_product_feature">
+                            <option>Выберите характеристику</option>
+
+                            <?php
+                                foreach($data['features'] as $features) {
+                                    echo '
+                                        <option value="'.$features['feature_id'].'">'.$features['name'].'</option>
+                                    ';
+                                }
+                            ?>
+
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" placeholder="Введите значение" required name="new_feature_value">
+                    </td>
+                    <td>
+                        <input type="submit" value="Добавить/перезаписать характеристику">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</section>
+

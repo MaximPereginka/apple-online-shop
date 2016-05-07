@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+
+    <!-- SEO: НАЗВАНИЕ, ОПИСАНИЕ, КЛЮЧЕВИКИ -->
+    <title><?php echo Config::get('site_name')?></title>
+    <meta name="description" content="<?php echo Config::get('site_description')?>">
+    <meta name="Keywords" content="<?php echo Config::get('site_keywords')?>">
+
+    <!-- ======= ТАБЛИЦЫ СТИЛЕЙ ======== -->
+    <link href="/css/normalize.css" rel="stylesheet" type="text/css">
+    <link href="/css/utility.css" rel="stylesheet" type="text/css">
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <!-- ========== MESSAGES ============ -->
+
+    <?php if(Session::hasMessage()) { ?>
+
+    <section class="row modal">
+        <div class="container">
+            <p><?php Session::message() ?></p>
+        </div>
+    </section>
+
+    <?php } ?>
+
+    <!-- =========== HEADER ============= -->
+    <header class="row">
+        <div class="container">
+            <div class="col-left">Лого</div>
+            <nav class="col-center">
+                <ul>
+                    <li><a href="http://localhost/main"><?php echo __('main','')?></a></li>
+                    <li><a href="http://localhost/products"><?php echo __('products','')?></a></li>
+                    <li><a href="http://localhost/callback"><?php echo __('contacts','')?></a></li>
+                </ul>
+            </nav>
+            <div class="col-right">Поиск</div>
+        </div>
+    </header>
+
+    <!-- =========== CONTENT ============== -->
+
+    <?php echo $data['content']?>
+
+    <!-- =========== FOOTER ============== -->
+    <footer class="row">
+        <div class="container">
+            <div class="col-left">Футер</div>
+
+            <div class="col-center">Футер</div>
+
+            <div class="col-right">Футер</div>
+        </div>
+    </footer>
+</body>
+</html>

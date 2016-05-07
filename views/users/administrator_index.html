@@ -1,0 +1,40 @@
+<section class="administrator-users">
+    <div class="container">
+        <table rules="none">
+            <tr>
+                <th>ID</th>
+                <th>Логин</th>
+                <th>Тип</th>
+                <th>Email</th>
+                <th>Номер телефона</th>
+            </tr>
+
+            <?php
+                $k = 0;
+
+                foreach($data['users'] as $users) {
+
+                    $class = $k % 2;
+                    $k++;
+
+                    ?>
+
+                    <tr class="row-<?php echo $class ?>">
+                        <td><?php echo $users['user_id'] ?></td>
+                        <td><?php echo $users['login'] ?></td>
+                        <td><?php echo $users['name'] ?></td>
+                        <td><?php echo $users['email'] ?></td>
+                        <td><?php echo $users['phone'] ?></td>
+                        <td><a href="/administrator/users/edit/<?php echo $users['user_id'] ?>" class="edit-button">Редактировать</a></td>
+                        <td><a onclick="return confirmDeleteUsers()" href="/administrator/users/delete/<?php echo $users['user_id'] ?>" class="delete-button">Удалить</a></td>
+                    </tr>
+
+                    <?php
+
+                }
+            ?>
+
+
+        </table>
+    </div>
+</section>

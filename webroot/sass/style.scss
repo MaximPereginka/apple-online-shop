@@ -1,0 +1,436 @@
+/*---------------------------- Breakpoints ---------------------------*/
+$iPhone4Rotated: 479px;
+$iPad: 760px;
+$iPadRotated: 1020px;
+
+/*------------------------------- Fonts --------------------------------*/
+@font-face {
+  font-family: Ronduit Capitals; /* Ð˜Ð¼Ñ ÑˆÑ€Ð¸Ñ„Ñ‚Ð° */
+  src: url(../fonts/RonduitCapitals-Light.otf); /* ÐŸÑƒÑ‚ÑŒ Ðº Ñ„Ð°Ð¹Ð»Ñƒ ÑÐ¾ ÑˆÑ€Ð¸Ñ„Ñ‚Ð¾Ð¼ */
+}
+
+/*======================= CONTROL PANEL STYLES =======================*/
+/*------------------------- Colors -----------------------------*/
+$darkGrey: #333333;
+$brightGrey: #EEEEEE;
+$white: #FFFFFF;
+$darkOrange: #FF7F00;
+$green: #32CD32;
+$veryBrightGrey: #f9f9f9;
+
+
+/*--------------------- For iPhone 4s -----------------------------*/
+
+.row {
+  width: 100%;
+}
+
+.container {
+  min-width: 320px;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+/*-------------- Header -----------------------*/
+header.administrator {
+  background: $brightGrey;
+  padding: 25px 0;
+  font-family: "Segoe UI";
+
+  .container {
+    div {
+      text-align: center;
+    }
+
+    .headline {
+      h1 {
+        font-size: 180%;
+        margin: 0;
+        font-family: Ronduit Capitals;
+        font-size: 150%;
+
+        a {
+          text-decoration: none;
+          color: $darkGrey;
+          line-height: 25px;
+        }
+      }
+    }
+
+    .user {
+
+      padding: 10px 0 0;
+
+      p {
+        margin: 0;
+      }
+
+      .action {
+
+        padding: 20px 0 0;
+
+        a {
+          font-size: 90%;
+          text-decoration: none;
+          color: $white;
+          border: 1px solid $darkOrange;
+          background: $darkOrange;
+          padding: 8px 16px;
+          text-transform: uppercase;
+          transition: 0.25s ease all;
+        }
+
+        a:hover {
+          background: $green;
+          color: $white;
+          border: 1px solid $green;
+        }
+
+        a.logout {
+          color: $darkOrange;
+          background: none;
+        }
+
+        a.logout:hover {
+          background: $green;
+          color: $white;
+        }
+      }
+    }
+  }
+}
+
+/*--------------------MESSAGE------------------------*/
+section.administrator-message {
+  background: $veryBrightGrey;
+
+  .container {
+    p {
+      color: $darkGrey;
+      text-align: center;
+      font-weight: bold;
+    }
+  }
+}
+
+/*---------------- Content ---------------------*/
+/*----------------- Main page -------------------*/
+section.administrator-actions {
+  font-family: "Segoe UI";
+  padding-bottom: 80px;
+
+  .container {
+    .col {
+      text-align: center;
+      margin: 0 auto;
+      padding-bottom: 15px;
+
+      h2 {
+        color: $darkGrey;
+        font-size: 150%;
+      }
+
+      .tile {
+        width: 150px;
+        margin: 0 auto;
+        position: relative;
+
+        &:hover {
+          img {
+            opacity: 0.8;
+          }
+        }
+
+        img {
+          width: 150px;
+          transition: 0.25s ease all;
+        }
+
+        h3 {
+          width: 140px;
+          text-align: center;
+
+          color: $white;
+          margin: 0;
+
+          font-size: 95%;
+
+          font-weight: bold;
+
+          position: absolute;
+          left: 5px;
+          bottom: 20px;
+        }
+
+        h3.one-line {
+          padding-bottom: 7px;
+        }
+      }
+    }
+  }
+}
+
+/*----------------- Products's list -------------------*/
+section.administrator-products-list-actions {
+  padding: 20px 0;
+  background: $veryBrightGrey;
+
+  .container {
+    text-align: center;
+
+    a {
+      font-size: 90%;
+      text-decoration: none;
+      color: $white;
+      background: $darkOrange;
+      border: 1px solid $darkOrange;
+      padding: 8px 16px;
+      text-transform: uppercase;
+      transition: 0.25s ease all;
+    }
+
+    a:hover {
+      background: $green;
+      color: $white;
+      border: 1px solid $green;
+    }
+  }
+}
+section.administrator-products-list {
+  padding-bottom: 80px;
+
+  .container {
+    .products {
+
+      h2 {
+        color: $darkGrey;
+        text-align: center;
+      }
+
+      .product {
+        padding: 15px 15px 30px 15px;
+        background: $veryBrightGrey;
+        width: 280px;
+        margin: 0 auto;
+        margin-bottom: 30px;
+
+        img {
+          width: 250px;
+          border: 1px solid $brightGrey;
+          display: block;
+          margin: 0 auto;
+        }
+
+        .description {
+          p {
+            color: $darkGrey;
+          }
+        }
+
+        .product-actions {
+          text-align: center;
+
+          a {
+            font-size: 80%;
+            text-decoration: none;
+            color: $white;
+            background: $darkOrange;
+            border: 1px solid $darkOrange;
+            padding: 8px 16px;
+            text-transform: uppercase;
+            transition: 0.25s ease all;
+          }
+
+          a.delete {
+            background: none;
+            color: $darkOrange;
+          }
+
+          a:hover {
+            background: $green;
+            color: $white;
+            border: 1px solid $green;
+          }
+
+          a.delete:hover {
+            color: $white;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*----------------- Products's editing -------------------*/
+section.administrator-product-edit {
+  .container {
+
+  }
+}
+/*---------------- Footer ---------------------*/
+footer.administrator {
+  background: $darkGrey;
+  font-family: "Segoe UI";
+  position: fixed;
+  bottom: 0;
+
+  .container {
+    p {
+      color: $white;
+      padding: 20px;
+      margin: 0;
+      text-align: center;
+    }
+  }
+}
+
+/*-------------------- For rotated iPhone 4s -------------*/
+
+@media (min-width: $iPhone4Rotated) {
+  /*----------------- Main page -------------------*/
+  section.administrator-actions {
+    .container {
+      .col {
+        width: 310px;
+
+        .tile {
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
+
+/*-------------------- For iPad -------------*/
+@media (min-width: $iPad) {
+  header.administrator {
+    .container {
+      width: 525px;
+
+      div.headline,
+      div.user {
+        display: inline-block;
+        vertical-align: bottom;
+        width: 49%;
+      }
+
+      .headline {
+        text-align: left;
+      }
+
+      .user {
+        padding: 0;
+      }
+
+      .action {
+        padding: 10px 0 0 !important;
+      }
+
+      .user, .action {
+        text-align: right;
+      }
+    }
+  }
+  /*----------------- Main page -------------------*/
+  section.administrator-actions {
+    .container {
+      padding: 20px 0 40px;
+
+      .block {
+        margin: 0 auto;
+        width: 525px;
+      }
+
+      .col {
+        display: inline-block;
+
+        h2 {
+          text-align: left;
+        }
+      }
+
+      .col-2, .col-4 {
+        width: 150px;
+      }
+      .col-1, .col-3 {
+        margin-right: 60px;
+      }
+    }
+  }
+
+  /*----------------- Products's list -------------------*/
+  section.administrator-products-list {
+    .container {
+      .products {
+        .product {
+          padding: 15px;
+          width: 95%;
+          overflow: hidden;
+          margin-bottom: 15px;
+          position: relative;
+
+          img {
+            display: block;
+            float: left;
+            width: 150px;
+          }
+
+          .description {
+            margin-left: 160px;
+            margin-bottom: 45px;
+          }
+
+          .product-actions {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*-------------------- For rotated iPad -------------*/
+
+@media (min-width: $iPadRotated) {
+
+  header.administrator {
+    .container {
+      width: 1050px;
+
+      div.headline,
+      div.user {
+        vertical-align: middle;
+      }
+    }
+  }
+
+  section.administrator-actions {
+    .container {
+      text-align: center;
+
+      .block {
+        display: inline-block;
+      }
+
+      .alone {
+        text-align: left;
+
+        .col {
+          margin-left: 60px;
+        }
+      }
+
+      .col {
+        display: inline-block;
+        vertical-align: top;
+      }
+
+      .col-3 {
+        width: 150px;
+        margin-left: 50px;
+      }
+    }
+  }
+}

@@ -1,0 +1,257 @@
+@charset "UTF-8";
+/*---------------------------- Breakpoints ---------------------------*/
+/*------------------------------- Fonts --------------------------------*/
+@font-face {
+  font-family: Ronduit Capitals;
+  /* ├É╦£├É┬╝├æ┬Å ├æ╦å├æΓé¼├É┬╕├æΓÇ₧├æΓÇÜ├É┬░ */
+  src: url(../fonts/RonduitCapitals-Light.otf);
+  /* ├É┼╕├æ╞Æ├æΓÇÜ├æ┼Æ ├É┬║ ├æΓÇ₧├É┬░├É┬╣├É┬╗├æ╞Æ ├æ┬ü├É┬╛ ├æ╦å├æΓé¼├É┬╕├æΓÇ₧├æΓÇÜ├É┬╛├É┬╝ */ }
+/*======================= CONTROL PANEL STYLES =======================*/
+/*------------------------- Colors -----------------------------*/
+/*--------------------- For iPhone 4s -----------------------------*/
+.row {
+  width: 100%; }
+
+.container {
+  min-width: 320px;
+  max-width: 1500px;
+  margin: 0 auto; }
+
+/*-------------- Header -----------------------*/
+header.administrator {
+  background: #EEEEEE;
+  padding: 25px 0;
+  font-family: "Segoe UI"; }
+  header.administrator .container div {
+    text-align: center; }
+  header.administrator .container .headline h1 {
+    font-size: 180%;
+    margin: 0;
+    font-family: Ronduit Capitals;
+    font-size: 150%; }
+    header.administrator .container .headline h1 a {
+      text-decoration: none;
+      color: #333333;
+      line-height: 25px; }
+  header.administrator .container .user {
+    padding: 10px 0 0; }
+    header.administrator .container .user p {
+      margin: 0; }
+    header.administrator .container .user .action {
+      padding: 20px 0 0; }
+      header.administrator .container .user .action a {
+        font-size: 90%;
+        text-decoration: none;
+        color: #FFFFFF;
+        border: 1px solid #FF7F00;
+        background: #FF7F00;
+        padding: 8px 16px;
+        text-transform: uppercase;
+        transition: 0.25s ease all; }
+      header.administrator .container .user .action a:hover {
+        background: #32CD32;
+        color: #FFFFFF;
+        border: 1px solid #32CD32; }
+      header.administrator .container .user .action a.logout {
+        color: #FF7F00;
+        background: none; }
+      header.administrator .container .user .action a.logout:hover {
+        background: #32CD32;
+        color: #FFFFFF; }
+
+/*--------------------MESSAGE------------------------*/
+section.administrator-message {
+  background: #f9f9f9; }
+  section.administrator-message .container p {
+    color: #333333;
+    text-align: center;
+    font-weight: bold; }
+
+/*---------------- Content ---------------------*/
+/*----------------- Main page -------------------*/
+section.administrator-actions {
+  font-family: "Segoe UI";
+  padding-bottom: 80px; }
+  section.administrator-actions .container .col {
+    text-align: center;
+    margin: 0 auto;
+    padding-bottom: 15px; }
+    section.administrator-actions .container .col h2 {
+      color: #333333;
+      font-size: 150%; }
+    section.administrator-actions .container .col .tile {
+      width: 150px;
+      margin: 0 auto;
+      position: relative; }
+      section.administrator-actions .container .col .tile:hover img {
+        opacity: 0.8; }
+      section.administrator-actions .container .col .tile img {
+        width: 150px;
+        transition: 0.25s ease all; }
+      section.administrator-actions .container .col .tile h3 {
+        width: 140px;
+        text-align: center;
+        color: #FFFFFF;
+        margin: 0;
+        font-size: 95%;
+        font-weight: bold;
+        position: absolute;
+        left: 5px;
+        bottom: 20px; }
+      section.administrator-actions .container .col .tile h3.one-line {
+        padding-bottom: 7px; }
+
+/*----------------- Products's list -------------------*/
+section.administrator-products-list-actions {
+  padding: 20px 0;
+  background: #f9f9f9; }
+  section.administrator-products-list-actions .container {
+    text-align: center; }
+    section.administrator-products-list-actions .container a {
+      font-size: 90%;
+      text-decoration: none;
+      color: #FFFFFF;
+      background: #FF7F00;
+      border: 1px solid #FF7F00;
+      padding: 8px 16px;
+      text-transform: uppercase;
+      transition: 0.25s ease all; }
+    section.administrator-products-list-actions .container a:hover {
+      background: #32CD32;
+      color: #FFFFFF;
+      border: 1px solid #32CD32; }
+
+section.administrator-products-list {
+  padding-bottom: 80px; }
+  section.administrator-products-list .container .products h2 {
+    color: #333333;
+    text-align: center; }
+  section.administrator-products-list .container .products .product {
+    padding: 15px 15px 30px 15px;
+    background: #f9f9f9;
+    width: 280px;
+    margin: 0 auto;
+    margin-bottom: 30px; }
+    section.administrator-products-list .container .products .product img {
+      width: 250px;
+      border: 1px solid #EEEEEE;
+      display: block;
+      margin: 0 auto; }
+    section.administrator-products-list .container .products .product .description p {
+      color: #333333; }
+    section.administrator-products-list .container .products .product .product-actions {
+      text-align: center; }
+      section.administrator-products-list .container .products .product .product-actions a {
+        font-size: 80%;
+        text-decoration: none;
+        color: #FFFFFF;
+        background: #FF7F00;
+        border: 1px solid #FF7F00;
+        padding: 8px 16px;
+        text-transform: uppercase;
+        transition: 0.25s ease all; }
+      section.administrator-products-list .container .products .product .product-actions a.delete {
+        background: none;
+        color: #FF7F00; }
+      section.administrator-products-list .container .products .product .product-actions a:hover {
+        background: #32CD32;
+        color: #FFFFFF;
+        border: 1px solid #32CD32; }
+      section.administrator-products-list .container .products .product .product-actions a.delete:hover {
+        color: #FFFFFF; }
+
+/*----------------- Products's editing -------------------*/
+/*---------------- Footer ---------------------*/
+footer.administrator {
+  background: #333333;
+  font-family: "Segoe UI";
+  position: fixed;
+  bottom: 0; }
+  footer.administrator .container p {
+    color: #FFFFFF;
+    padding: 20px;
+    margin: 0;
+    text-align: center; }
+
+/*-------------------- For rotated iPhone 4s -------------*/
+@media (min-width: 479px) {
+  /*----------------- Main page -------------------*/
+  section.administrator-actions .container .col {
+    width: 310px; }
+    section.administrator-actions .container .col .tile {
+      display: inline-block; } }
+/*-------------------- For iPad -------------*/
+@media (min-width: 760px) {
+  header.administrator .container {
+    width: 525px; }
+    header.administrator .container div.headline,
+    header.administrator .container div.user {
+      display: inline-block;
+      vertical-align: bottom;
+      width: 49%; }
+    header.administrator .container .headline {
+      text-align: left; }
+    header.administrator .container .user {
+      padding: 0; }
+    header.administrator .container .action {
+      padding: 10px 0 0 !important; }
+    header.administrator .container .user, header.administrator .container .action {
+      text-align: right; }
+
+  /*----------------- Main page -------------------*/
+  section.administrator-actions .container {
+    padding: 20px 0 40px; }
+    section.administrator-actions .container .block {
+      margin: 0 auto;
+      width: 525px; }
+    section.administrator-actions .container .col {
+      display: inline-block; }
+      section.administrator-actions .container .col h2 {
+        text-align: left; }
+    section.administrator-actions .container .col-2, section.administrator-actions .container .col-4 {
+      width: 150px; }
+    section.administrator-actions .container .col-1, section.administrator-actions .container .col-3 {
+      margin-right: 60px; }
+
+  /*----------------- Products's list -------------------*/
+  section.administrator-products-list .container .products .product {
+    padding: 15px;
+    width: 95%;
+    overflow: hidden;
+    margin-bottom: 15px;
+    position: relative; }
+    section.administrator-products-list .container .products .product img {
+      display: block;
+      float: left;
+      width: 150px; }
+    section.administrator-products-list .container .products .product .description {
+      margin-left: 160px;
+      margin-bottom: 45px; }
+    section.administrator-products-list .container .products .product .product-actions {
+      position: absolute;
+      right: 20px;
+      bottom: 20px; } }
+/*-------------------- For rotated iPad -------------*/
+@media (min-width: 1020px) {
+  header.administrator .container {
+    width: 1050px; }
+    header.administrator .container div.headline,
+    header.administrator .container div.user {
+      vertical-align: middle; }
+
+  section.administrator-actions .container {
+    text-align: center; }
+    section.administrator-actions .container .block {
+      display: inline-block; }
+    section.administrator-actions .container .alone {
+      text-align: left; }
+      section.administrator-actions .container .alone .col {
+        margin-left: 60px; }
+    section.administrator-actions .container .col {
+      display: inline-block;
+      vertical-align: top; }
+    section.administrator-actions .container .col-3 {
+      width: 150px;
+      margin-left: 50px; } }
+
+/*# sourceMappingURL=style.css.map */

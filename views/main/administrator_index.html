@@ -1,0 +1,101 @@
+<section class="administrator-actions row">
+    <div class="container">
+
+        <div class="block">
+            <!-- Группа "Продукция" -->
+            <div class="col col-1">
+                <h2>Продукция</h2>
+                <div class="actions">
+                    <div class="tile">
+                        <a href="/administrator/products/view">
+                            <img src="img/administrator/products-list.png" alt="Список товаров" />
+                            <h3 class="one-line">Список товаров</h3>
+                        </a>
+                    </div>
+
+                    <div class="tile">
+                        <a href="#">
+                            <img src="img/administrator/providers-list.png" alt="Поставщики" />
+                            <h3 class="one-line">Поставщики</h3>
+                        </a>
+                    </div>
+
+                    <div class="tile">
+                        <a href="#">
+                            <img src="img/administrator/products-category-list.png" alt="Категории товаров" />
+                            <h3 class="one-line">Категории товаров</h3>
+                        </a>
+                    </div>
+
+                    <div class="tile">
+                        <a href="#">
+                            <img src="img/administrator/products-characteristics-list.png" alt="Характеристики товаров" />
+                            <h3>Характеристики товаров</h3>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Группа "Заказы" -->
+            <div class="col col-2">
+                <h2>Заказы</h2>
+                <div class="actions">
+                    <div class="tile">
+                        <a href="#">
+                            <img src="img/administrator/orders-list.png" alt="Список заказов" />
+                            <h3 class="one-line">Список заказов</h3>
+                        </a>
+                    </div>
+
+                    <div class="tile">
+                        <a href="#">
+                            <img src="img/administrator/clients-list.png" alt="Список клиентов" />
+                            <h3 class="one-line">Клиенты</h3>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="block <?php if(Session::get('user_type') != '1') echo 'alone'?>">
+
+            <?php if(Session::get('user_type') == '1') { ?>
+
+            <!-- Группа "Настройки" -->
+            <div class="col col-3">
+                <h2>Настройки</h2>
+                <div class="actions">
+                    <div class="tile">
+                        <a href="/administrator/users">
+                            <img src="img/administrator/users-list.png" alt="Список пользователей" />
+                            <h3 class="one-line">Пользователи</h3>
+                        </a>
+                    </div>
+
+                    <div class="tile">
+                        <a href="#\">
+                            <img src="img/administrator/site-options.png" alt="Настройки сайта" />
+                            <h3 class="one-line">Настройки сайта</h3>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <?php } ?>
+
+            <!-- Группа "Сообщения" -->
+            <div class="col col-4">
+                <h2>Сообщения</h2>
+                <div class="actions">
+                    <div class="tile">
+                        <a href="/administrator/callback">
+                            <img src="img/administrator/feedback.png" alt="Сообщения от пользователей" />
+                            <h3 class="one-line">Сообщения</h3>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+
+    <!-- SEO: НАЗВАНИЕ, ОПИСАНИЕ, КЛЮЧЕВИКИ -->
+    <title><?php echo Config::get('site_name')?></title>
+    <meta name="description" content="<?php echo Config::get('site_description')?>">
+    <meta name="Keywords" content="<?php echo Config::get('site_keywords')?>">
+
+    <!-- ======= ТАБЛИЦЫ СТИЛЕЙ ======== -->
+    <link href="/css/normalize.css" rel="stylesheet" type="text/css">
+    <link href="/css/utility.css" rel="stylesheet" type="text/css">
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+        <!-- Выводит логин, если пользователь вошел в систему -->
+
+<?php
+    $auth = 0;
+    if(null !== (Session::get('login')) && (App::getRouter()->getRoute() == 'administrator')) {
+    $auth = 1;
+    }
+
+    if($auth) {
+
+?>
+
+<!-- =========== HEADER ============= -->
+<header class="administrator row">
+                <div class="container">
+                    <div class="headline">
+                        <h1><a href="/administrator">Панель управления</a></h1>
+                    </div>
+                    <div class="user">
+
+
+                            <?php echo "<p>Вы вошли как <b>".ucfirst(Session::get('login'))."</b></p>" ?>
+
+                        <div class="action">
+                            <a href="/administrator/users/logout">Личный кабинет</a>
+                            <a class="logout" href="/administrator/users/logout">Выйти</a>
+                        </div>
+                    </div>
+                </div>
+        </header>
+
+<?php } ?>
+
+    <!-- ========== MESSAGES ============ -->
+
+    <?php if(Session::hasMessage()) { ?>
+
+    <section class="row administrator-message">
+        <div class="container">
+            <p><?php Session::message() ?></p>
+        </div>
+    </section>
+
+    <?php } ?>
+
+
+    <!-- =========== CONTENT ============== -->
+
+    <?php echo $data['content']?>
+
+<?php if($auth) { ?>
+
+    <!-- =========== FOOTER ============== -->
+    <footer class="row administrator">
+        <div class="container">
+            <p>Техподдержка: maxim.pereginka@outlook.com</p>
+        </div>
+    </footer>
+
+<?php } ?>
+
+    <!-- ========== SCRIPTS ================== -->
+    <script src="/js/administrator.js"></script>
+</body>
+</html>
