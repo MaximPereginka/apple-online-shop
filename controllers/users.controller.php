@@ -31,6 +31,8 @@ class UsersController extends Controller
                 //Авторизация прошла успешно
                 //Логин
                 Session::set('login', $user['login']);
+                //ID Пользователя
+                Session::set('user_id', $user['user_id']);
                 //Тип пользователя
                 Session::set('user_type', $user['user_type']);
                 Router::redirect('/administrator');
@@ -70,6 +72,7 @@ class UsersController extends Controller
 
                     if($result) {
                         Session::setMessage('Пользователь успешно отредактирован');
+                        Router::redirect('/administrator/users/edit/'.$this->params[0]); //Костыль
                     }
                     else {
                         Session::setMessage('Ошибка редактирования пользователя');
@@ -148,6 +151,64 @@ class UsersController extends Controller
             }
             else {
                 Session::setMessage('Ошибка удаления пользователя');
+            }
+        }
+    }
+
+    //Личный кабинет
+    //Метод выводит страницу редактирования информации о авторизированном пользователе
+    public function administrator_private_office(){
+        //Получаем информацию о текущем авторизированном пользователе
+        $this->data['user'] = $this->model->get_by_id(Session::get('user_id'));
+
+        if(isset($_POST)) {
+            if(isset($_POST['save_main_information'])) {
+                $result = $this->model->private_office_save($_POST);
+                if ($result) {
+                    Session::setMessage("Информация успешно сохранена");
+                    Router::redirect('/administrator/users/private_office'); //Костыль. Иначе не видно изменений после обновления информации
+                }
+                else Session::setMessage("Ошибка сохранения");
+            }
+            else if(isset($_POST['change_password'])) {
+                if($_POST['new_password'] != $_POST['new_password_repeated']) {
+                    Session::setMessage('Новый пароль и повторно введённый новый пароль не совпадают');
+                }
+                else {
+                    //Получаем ID пользователя
+                    $id = (int)$_POST['user_id'];
+
+                    //Получаем зашифрованный текущий пароль
+                    $db_current = $this->model->get_user_password($id);
+
+                    if($db_current) {
+                        $db_current = $db_current[0]['password'];
+
+                        //Шифруем введённый текущий пароль
+                        $current = md5(Config::get('salt').$_POST['current_password']);
+
+                        //Проверяем, совпадают ли пароли
+                        if($db_current != $current) {
+                            Session::setMessage("Неверный пароль");
+                        }
+                        else {
+                            //Шифруем новый пароль
+                            $new_password = md5(Config::get('salt').$_POST['new_password']);
+                            
+                            $result = $this->model->private_office_change_password($id, $new_password);
+                            
+                            if($result) {
+                                Session::setMessage("Пароль успешно изменён");
+                            }
+                            else {
+                                Session::setMessage("шибка изменения пароля");
+                            }
+                        }
+                    }
+                    else {
+                        Session::setMessage("Не удалось получить текущий пароль из базы данных");
+                    }
+                }
             }
         }
     }

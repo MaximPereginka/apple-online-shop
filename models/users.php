@@ -201,4 +201,48 @@
          
          return $this->db->query($sql);
      }
+     
+     //Личный кабинет
+     //Сохраняет информацию в личном кабинете. Принимает данные, отправленные с формы
+     public function private_office_save($data){
+         //Проверяем, все ли данные получены с формы
+         if(
+            !isset($data['user_id'])
+            || !isset($data['login'])
+            || !isset($data['email'])
+            || !isset($data['phone'])
+         ) return false;
+         else {
+
+             //Подготовка для записи в базу данных
+             //Защита от SQL инъекций
+             $id = $this->db->escape($data['user_id']);
+             $login = $this->db->escape($data['login']);
+             $email = $this->db->escape($data['email']);
+             $phone = $this->db->escape($data['phone']);
+
+             $sql = "
+                UPDATE users
+                SET login = '".$login."',
+                    email = '".$email."',
+                    phone = '".$phone."'
+                WHERE user_id = '".$id."'
+             ";
+
+             return $this->db->query($sql);
+         }
+     }
+
+    public function private_office_change_password($user_id, $new_password){
+        $user_id = (int)$user_id;
+        $new_password = $this->db->escape($new_password);
+
+        $sql = "
+            UPDATE users
+            SET password = '".$new_password."'
+            WHERE user_id = '".$user_id."'
+        ";
+
+        return $this->db->query($sql);
+    }
  }
