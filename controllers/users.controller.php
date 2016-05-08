@@ -63,16 +63,41 @@ class UsersController extends Controller
 
             //Принимаем данные в случаи отправки форм на странице
             if(isset($_POST)){
-                if(isset($_POST['user_id'])) {
+                //В случаи обновления информации о пользователе
+                if(isset($_POST['user_id']) && isset($_POST['save_main_information'])) {
                     $id = isset($_POST['user_id']) ? $_POST['user_id'] : null;
                     $result = $this->model->save($_POST, $id);
 
                     if($result) {
-                        Router::redirect('/administrator');
                         Session::setMessage('Пользователь успешно отредактирован');
                     }
                     else {
                         Session::setMessage('Ошибка редактирования пользователя');
+                    }
+                }
+                //В случаи изменения пароля
+                if(isset($_POST['change_password'])) {
+                    $id = isset($_POST['user_id']) ? $_POST['user_id'] : null;
+                    
+                    //Проверяем, совпадают ли новый пароль и его повторный ввод
+                    if($_POST['new_password'] != $_POST['new_password_repeated']) {
+                        Session::setMessage('Неверный повторный ввод нового пароля'); //Стоит перефразировать
+                    }
+                    else {
+                        //Сохраняем данные из формы в переменные
+                        $new = $_POST['new_password'];
+
+                        //Шифруем новый пароль
+                        $new = md5(Config::get('salt').$new);
+                        //Изменяем пароль
+                        $result = $this->model->change_password($id, $new);
+
+                        if($result) {
+                            Session::setMessage('Пароль успешно изменён');
+                        }
+                        else {
+                            Session::setMessage('Ошибка изменения пароля');
+                        }
                     }
                 }
             }
@@ -83,12 +108,42 @@ class UsersController extends Controller
         }
     }
 
+    //Создаёт нового пользователя и открывает страницу редактирования
+    public function administrator_add(){
+        $password = 0;
+        //Генерируем случайное 4-х значное число
+        for($i = 0; $i < 4; $i++) {
+            $password *= 10;
+            $password += rand() % 10;
+        }
+        
+        $result = $this->model->add($password);
+        if($result) {
+            //Получаем id нового пользователя
+            $user_id = $this->model->get_last();
+            $user_id = $user_id[0]['user_id'];
+            if($user_id) {
+                Session::setMessage('Новый пользователь успешно создан. Временный пароль: ' . $password);
+                Router::redirect('/administrator/users/edit/'. $user_id);
+            }
+            else {
+                Session::setMessage('Новый пользователь успешно создан. Ошибка редактирования.');
+                Router::redirect('/administrator/users');
+            }
+        }
+        else {
+            Session::setMessage('Ошибка создания пользователя');
+            Router::redirect('/administrator/users');
+        }
+    }
+    
     //Метод удаляет товар по его ID
     //Методу не нужно представление
     public function administrator_delete(){
         if(isset($this->params[0])) {
             $result = $this->model->delete($this->params[0]);
             if($result) {
+                Session::setMessage('Пользователь успешно удалён');
                 Router::redirect('/administrator/users');
             }
             else {

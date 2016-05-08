@@ -53,7 +53,14 @@ class App
 
         //Проверяем, может ли пользователь вызывать определённые методы админки
         if(Session::get('user_type') != '1'
-            && ($controller_method == 'administrator_site_options' || $controller_method == 'administrator_users')) {
+            && ($controller_class == 'UsersController')
+            && (
+                $controller_method == 'administrator_edit' 
+                || $controller_method == 'administrator_index'
+                || $controller_method == 'administrator_add'
+                || $controller_method == 'administrator_delete'
+            )
+        ) {
             Session::setMessage('У Вас недостаточно полномочий для просмотра данной страницы');
             Router::redirect('/administrator');
         }

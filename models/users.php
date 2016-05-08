@@ -118,9 +118,41 @@
          return $this->db->query($sql);
      }
 
-     //Изменяет пароль
-     public function change_password($data, $id = null) {
-         
+     //Возвращает ID последнего зарегистрированного пользователя
+     public function get_last(){
+         $sql = "
+            SELECT user_id
+            FROM users
+            ORDER BY user_id DESC
+            LIMIT 1
+        ";
+
+         return $this->db->query($sql);
+     }
+
+     //Создаёт нового пользователя
+     //Принимает сгенерированный пароль из 4-х цифр
+     public function add($password) {
+         //Кодируем пароль
+         $password = md5(Config::get('salt').(int)$password);
+
+         $sql = "
+            SELECT user_id
+            FROM users
+            ORDER BY user_id DESC 
+            LIMIT 1
+         ";
+
+         //Генерируем login
+         $result = $this->db->query($sql);
+         $result = $result[0]['user_id'] + 1;
+
+         $sql = "
+            INSERT INTO users
+            (login, password, user_type) VALUES ('user".$result."', '".$password."', '3')
+         ";
+
+         return $this->db->query($sql);
      }
 
      //Удаляет пользователя
@@ -137,6 +169,34 @@
          $sql = "
             SELECT *
             FROM user_type
+         ";
+         
+         return $this->db->query($sql);
+     }
+
+     //Получает зашифрованный пароль пользователя
+     public function get_user_password($id) {
+         $id = (int)$id;
+
+         $sql = "
+             SELECT password
+             FROM users
+             WHERE user_id = '".$id."'
+             LIMIT 1
+         ";
+         
+         return $this->db->query($sql);
+     }
+
+     //Изменяет пароль пользователя
+     public function change_password($id, $new) {
+         $id = (int)$id;
+         $new = $this->db->escape($new);
+         
+         $sql = "
+            UPDATE users
+            SET password = '".$new."'
+            WHERE user_id = '".$id."'
          ";
          
          return $this->db->query($sql);

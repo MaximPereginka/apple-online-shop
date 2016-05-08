@@ -10,22 +10,26 @@
 class Session
 {
     //Текст сообщений для пользователя
-    protected static $flash_message;
+    //Не работает на xampp
+    //protected static $flash_message;
 
     //Устанавливает текст сообщения *
     public static function setMessage($message){
-        self::$flash_message = $message;
+        $_SESSION['flash_message'] = $message;
     }
 
     //Проверяет наличие сообщения для пользователя
     public static function hasMessage() {
-        return !is_null(self::$flash_message);
+        if(isset($_SESSION['flash_message'])) {
+            return !is_null($_SESSION['flash_message']);
+        }
     }
 
     //Выводит текущее сообщение
     //После вывода удаляет сообщение из памяти
     public static function message(){
-        echo self::$flash_message;
+        echo $_SESSION['flash_message'];
+        $_SESSION['flash_message'] = null;
     }
 
     //Метод записывает данные в массив $_SESSION по ключу

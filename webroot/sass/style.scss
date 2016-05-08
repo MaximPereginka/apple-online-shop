@@ -267,6 +267,14 @@ section.administrator-product-edit {
 
   }
 }
+
+/*---------------- Empty line -----------------------*/
+div.empty {
+  display: block;
+  height: 72px;
+  width: 100%;
+}
+
 /*---------------- Footer ---------------------*/
 footer.administrator {
   background: $darkGrey;
