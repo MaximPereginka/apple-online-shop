@@ -373,7 +373,7 @@ class Products extends Model
             FROM `product_category`
             WHERE category_id = '".$id."'
         ";
-
+        
         return $this->db->query($sql);
     }
 
@@ -385,6 +385,48 @@ class Products extends Model
             DELETE
             FROM `categories`
             WHERE category_id = '".$id."'
+        ";
+
+        return $this->db->query($sql);
+    }
+
+    //Добавляет характеристику
+    public function add_feature($data){
+        if(!isset($data['feature_name'])) return false;
+        else {
+            $name = $this->db->escape($data['feature_name']);
+
+            $sql = "
+                INSERT INTO `features`
+                (`name`)
+                VALUES ('".$name."')
+            ";
+
+            return $this->db->query($sql);
+        }
+    }
+
+    //Удаляет характеристику
+    public function delete_feature($id){
+        $id = (int)$id;
+
+        $sql = "
+            DELETE
+            FROM `features`
+            WHERE `feature_id` = '".$id."'
+        ";
+
+        return $this->db->query($sql);
+    }
+
+    //Удаляет все пары "характеристика-товар" по id х-ки
+    public function reset_feature($id){
+        $id = (int)$id;
+
+        $sql = "
+            DELETE
+            FROM `product_feature`
+            WHERE `feature_id` = '".$id."'
         ";
 
         return $this->db->query($sql);

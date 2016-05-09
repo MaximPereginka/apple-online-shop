@@ -254,4 +254,46 @@ class ProductsController extends Controller
             }
         }
     }
+    
+    //Страница с х-ками товаров
+    public function administrator_features(){
+        $this->data['features'] = $this->model->getFeaturesList();
+        
+        //Добавляем новую характеристику
+        if($_POST) {
+            $result = $this->model->add_feature($_POST);
+            if($result){
+                Session::setMessage("Характеристика успешно добавлена");
+                Router::redirect("/administrator/products/features");
+            }
+            else {
+                Session::setMessage("Ошибка добавления характеристики");
+            }
+        }
+        
+        //Удаляем характеристику по ID
+        if(isset($this->params[0]) && ($this->params[0] == 'delete')) {
+            if(isset($this->params[1])) {
+
+                //Подготовка базы - если арактеристика назначена на товар, удаляем привязки
+                $result = $this->model->reset_feature($this->params[1]);
+
+                if($result) {
+                    //Удаления характеристики из базы
+                    $result = $this->model->delete_feature($this->params[1]);
+
+                    if($result) {
+                        Session::setMessage('Характеристика успешно удалена');
+                        Router::redirect('/administrator/products/features');
+                    }
+                    else {
+                        Session::setMessage('Ошибка удаления характеристики');
+                    }
+                }
+                else {
+                    Session::setMessage("Не удалось удалить характеристику");
+                }
+            }
+        }
+    }
 }

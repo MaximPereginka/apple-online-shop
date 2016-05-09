@@ -1,0 +1,40 @@
+<section class="row">
+    <div class="container">
+        <h1>Характеристики товаров</h1>
+        <div>
+            <form action="" method="post">
+                <input name="feature_name" placeholder="Название характеристики" type="text" required>
+                <input type="submit" value="Добавить">
+            </form>
+        </div>
+        <table rules="none">
+            <tr>
+                <th>ID</th>
+                <th>Название</th>
+            </tr>
+
+            <?php
+                $k = 0;
+
+                foreach($data['features'] as $features) {
+
+                    $class = $k % 2;
+                    $k++;
+
+                    ?>
+
+            <tr class="row-<?php echo $class ?>">
+                <td><?php echo $features['feature_id'] ?></td>
+                <td><?php echo $features['name'] ?></td>
+                <td><a onclick="return confirmDeleteFeature()" href="/administrator/products/features/delete/<?php echo $features['feature_id'] ?>" class="delete-button">Удалить</a></td>
+            </tr>
+
+            <?php
+
+                }
+            ?>
+
+
+        </table>
+    </div>
+</section>

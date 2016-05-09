@@ -51,3 +51,13 @@ function confirmDeleteCategory() {
         return false;
     }
 }
+
+//Предупреждает об удалении категорий
+function confirmDeleteFeature() {
+    if(confirm("Вы действительно хотите удалить эту характеристику?")) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
