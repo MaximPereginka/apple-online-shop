@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Май 09 2016 г., 03:26
+-- Время создания: Май 09 2016 г., 20:36
 -- Версия сервера: 10.1.13-MariaDB
 -- Версия PHP: 5.6.20
 
@@ -74,7 +74,9 @@ INSERT INTO `categories` (`category_id`, `name`, `parent_id`, `has_parent`) VALU
 (1, 'Смартфоны', 0, 0),
 (2, 'Чехлы', 3, 1),
 (3, 'Аксессуары', 0, 0),
-(4, 'Наушники', 3, 1);
+(4, 'Наушники', 3, 1),
+(6, 'Новый смартфоны', 1, 0),
+(11, 'Цветные чехлы', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -118,7 +120,8 @@ INSERT INTO `features` (`feature_id`, `name`) VALUES
 (1, 'Цвет'),
 (2, 'Диагональ экрана'),
 (3, 'Оперативная память'),
-(4, 'Физическая память');
+(4, 'Физическая память'),
+(6, 'Объем аккумулятора');
 
 -- --------------------------------------------------------
 
@@ -129,7 +132,7 @@ INSERT INTO `features` (`feature_id`, `name`) VALUES
 CREATE TABLE `options` (
   `option_id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
-  `value` longtext NOT NULL
+  `value` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -138,8 +141,8 @@ CREATE TABLE `options` (
 
 INSERT INTO `options` (`option_id`, `name`, `value`) VALUES
 (6, 'site_name', 'Интернет-магазин "Яблочник"'),
-(7, 'site_decription', 'gg wp easy win'),
-(8, 'site_keywords', 'apple,цифровая электроника, блек-джек, шлюхи');
+(7, 'site_decription', 'Тут когда то будет описание. Но мне лень писать'),
+(8, 'site_keywords', 'apple,цифровая электроника');
 
 -- --------------------------------------------------------
 
@@ -150,16 +153,18 @@ INSERT INTO `options` (`option_id`, `name`, `value`) VALUES
 CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
   `client_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL
+  `user_id` int(11) NOT NULL,
+  `status_id` int(11) NOT NULL DEFAULT '0',
+  `date_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `orders`
 --
 
-INSERT INTO `orders` (`order_id`, `client_id`, `user_id`) VALUES
-(1, 1, 2),
-(2, 2, 2);
+INSERT INTO `orders` (`order_id`, `client_id`, `user_id`, `status_id`, `date_created`) VALUES
+(1, 1, 2, 1, '2016-05-09 20:52:24'),
+(2, 2, 2, 1, '2016-05-09 20:52:24');
 
 -- --------------------------------------------------------
 
@@ -185,6 +190,26 @@ INSERT INTO `order_content` (`position_id`, `order_id`, `product_id`, `quantiny`
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `order_status`
+--
+
+CREATE TABLE `order_status` (
+  `status_id` int(11) NOT NULL,
+  `name` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `order_status`
+--
+
+INSERT INTO `order_status` (`status_id`, `name`) VALUES
+(1, 'Не обработан'),
+(2, 'Обрабатывается'),
+(3, 'Обработан');
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `products`
 --
 
@@ -204,7 +229,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `provider_id`, `caption`, `price`, `image`, `short_description`, `long_description`, `is_published`) VALUES
-(6, 2, 'iPhone 5c', 6669, 'http://www.citrus.ua/upload/new_iblock/336/ad01bb85172b517d1d4be43ddf426373.jpg', 'Каждая инновация в iPhone должна отвечать одному условию — улучшить впечатление от его использования', 'Каждая инновация в iPhone должна отвечать одному условию — улучшить впечатление от его использования. Поэтому цвета iPhone 5c инженеры компании Apple продумывали так же тщательно, как и всё остальное. Даже палитра Главного экрана и обоев теперь гармонично сочетается с корпусом. Результат: iPhone стал ещё приятнее и увлекательнее. ', 1),
+(6, 1, 'iPhone 5c', 6669, 'http://www.citrus.ua/upload/new_iblock/336/ad01bb85172b517d1d4be43ddf426373.jpg', 'Каждая инновация в iPhone должна отвечать одному условию — улучшить впечатление от его использования', 'Каждая инновация в iPhone должна отвечать одному условию — улучшить впечатление от его использования. Поэтому цвета iPhone 5c инженеры компании Apple продумывали так же тщательно, как и всё остальное. Даже палитра Главного экрана и обоев теперь гармонично сочетается с корпусом. Результат: iPhone стал ещё приятнее и увлекательнее. ', 1),
 (7, 3, 'Apple iPhone SE 16Gb', 8999, 'http://www.citrus.ua/upload/new_iblock/6a6/a031bfaefa9bd61180b3010692097a70.jpg', 'Компания Apple представила iPhone SE — самый мощный 4‑дюймовый смартфон в истории. Чтобы создать его', 'Компания Apple представила iPhone SE — самый мощный 4‑дюймовый смартфон в истории. Чтобы создать его, Apple взяли за основу полюбившийся дизайн и полностью поменяли содержание. Установили тот же передовой процессор A9, что и на iPhone 6s, и камеру 12 Мп для съёмки невероятных фотографий и видео 4K. А благодаря Live Photos любой ваш снимок буквально оживёт. Результат? Небольшой iPhone с огромными возможностями.', 1);
 
 -- --------------------------------------------------------
@@ -268,8 +293,7 @@ CREATE TABLE `provider` (
 
 INSERT INTO `provider` (`provider_id`, `name`, `email`, `phone`) VALUES
 (1, 'Не определен', '', ''),
-(2, 'Поставщик 1', '', ''),
-(3, 'Поставщик 2', '', '');
+(6, 'Вася Пупкин', 'ggwp@easy.win', '555 33 55');
 
 -- --------------------------------------------------------
 
@@ -293,7 +317,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `user_type`, `login`, `password`, `name`, `email`, `phone`) VALUES
 (1, 1, 'Curious', '2284783635c32da2a5bd96f1bca0c82f', 'Максим', 'maxim.pereginka@outlook.com', '+380637218804'),
-(23, 1, 'Shoshka', 'ae77900a23c50dd0a3bab3611307d04c', '', '', '');
+(23, 1, 'Shoshka', 'ae77900a23c50dd0a3bab3611307d04c', '', '', ''),
+(24, 3, 'user24', '052883054635aeadd004651610465e30', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -357,7 +382,8 @@ ALTER TABLE `options`
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`order_id`),
   ADD KEY `client_id` (`client_id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `status_id` (`status_id`);
 
 --
 -- Индексы таблицы `order_content`
@@ -365,6 +391,12 @@ ALTER TABLE `orders`
 ALTER TABLE `order_content`
   ADD PRIMARY KEY (`position_id`),
   ADD KEY `order_id` (`order_id`,`product_id`);
+
+--
+-- Индексы таблицы `order_status`
+--
+ALTER TABLE `order_status`
+  ADD PRIMARY KEY (`status_id`);
 
 --
 -- Индексы таблицы `products`
@@ -419,7 +451,7 @@ ALTER TABLE `callback_messages`
 -- AUTO_INCREMENT для таблицы `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT для таблицы `clients`
 --
@@ -429,7 +461,7 @@ ALTER TABLE `clients`
 -- AUTO_INCREMENT для таблицы `features`
 --
 ALTER TABLE `features`
-  MODIFY `feature_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `feature_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT для таблицы `options`
 --
@@ -446,6 +478,11 @@ ALTER TABLE `orders`
 ALTER TABLE `order_content`
   MODIFY `position_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
+-- AUTO_INCREMENT для таблицы `order_status`
+--
+ALTER TABLE `order_status`
+  MODIFY `status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT для таблицы `products`
 --
 ALTER TABLE `products`
@@ -459,17 +496,17 @@ ALTER TABLE `product_category`
 -- AUTO_INCREMENT для таблицы `product_feature`
 --
 ALTER TABLE `product_feature`
-  MODIFY `record_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `record_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT для таблицы `provider`
 --
 ALTER TABLE `provider`
-  MODIFY `provider_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `provider_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT для таблицы `user_type`
 --
