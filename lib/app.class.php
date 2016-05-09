@@ -52,13 +52,18 @@ class App
         }
 
         //Проверяем, может ли пользователь вызывать определённые методы админки
-        if(Session::get('user_type') != '1'
-            && ($controller_class == 'UsersController')
-            && (
-                $controller_method == 'administrator_edit' 
-                || $controller_method == 'administrator_index'
-                || $controller_method == 'administrator_add'
-                || $controller_method == 'administrator_delete'
+        if(Session::get('user_type') != '1' &&
+            (
+                (
+                    ($controller_class == 'UsersController') && (
+                        $controller_method == 'administrator_edit'
+                        || $controller_method == 'administrator_index'
+                        || $controller_method == 'administrator_add'
+                        || $controller_method == 'administrator_delete'
+                    )
+                )
+                || ($controller_class == 'OptionsController')
+
             )
         ) {
             Session::setMessage('У Вас недостаточно полномочий для просмотра данной страницы');
