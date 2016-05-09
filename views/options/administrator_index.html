@@ -4,7 +4,10 @@
         <div class="form__block">
             <h2>SEO Оптимизация</h2>
             <form action="" method="post">
-                <p><b>Название сайта: </b><input type="text"></p>
+                <p><b>Название сайта: </b><input type="text" name="site_name" value="<?= htmlspecialchars($data['options'][0]['value']) ?>"></p>
+                <p><b>Описание сайта: </b><input type="text" name="site_description" value="<?= htmlspecialchars($data['options'][1]['value']) ?>"></p>
+                <p><b>Ключевые слова: </b><input type="text" name="site_keywords" value="<?= htmlspecialchars($data['options'][2]['value']) ?>"></p>
+                <p><input type="submit" value="Сохранить"></p>
             </form>
         </div>
     </div>
