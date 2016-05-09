@@ -2,10 +2,10 @@
 -- version 4.5.1
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: May 05, 2016 at 10:45 AM
--- Server version: 10.1.9-MariaDB
--- PHP Version: 5.6.15
+-- Хост: 127.0.0.1
+-- Время создания: Май 09 2016 г., 03:26
+-- Версия сервера: 10.1.13-MariaDB
+-- Версия PHP: 5.6.20
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,12 +17,12 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `apple_store`
+-- База данных: `apple_store`
 --
 
 DELIMITER $$
 --
--- Procedures
+-- Процедуры
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_product` (IN `pr_id` INT)  SQL SECURITY INVOKER
 BEGIN 
@@ -36,7 +36,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `callback_messages`
+-- Структура таблицы `callback_messages`
 --
 
 CREATE TABLE `callback_messages` (
@@ -47,7 +47,7 @@ CREATE TABLE `callback_messages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `callback_messages`
+-- Дамп данных таблицы `callback_messages`
 --
 
 INSERT INTO `callback_messages` (`message_id`, `client_name`, `email`, `message`) VALUES
@@ -56,7 +56,7 @@ INSERT INTO `callback_messages` (`message_id`, `client_name`, `email`, `message`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
+-- Структура таблицы `categories`
 --
 
 CREATE TABLE `categories` (
@@ -67,7 +67,7 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `categories`
+-- Дамп данных таблицы `categories`
 --
 
 INSERT INTO `categories` (`category_id`, `name`, `parent_id`, `has_parent`) VALUES
@@ -79,7 +79,7 @@ INSERT INTO `categories` (`category_id`, `name`, `parent_id`, `has_parent`) VALU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `clients`
+-- Структура таблицы `clients`
 --
 
 CREATE TABLE `clients` (
@@ -92,7 +92,7 @@ CREATE TABLE `clients` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `clients`
+-- Дамп данных таблицы `clients`
 --
 
 INSERT INTO `clients` (`client_id`, `name`, `surname`, `email`, `phone`, `notes`) VALUES
@@ -102,7 +102,7 @@ INSERT INTO `clients` (`client_id`, `name`, `surname`, `email`, `phone`, `notes`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `features`
+-- Структура таблицы `features`
 --
 
 CREATE TABLE `features` (
@@ -111,7 +111,7 @@ CREATE TABLE `features` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `features`
+-- Дамп данных таблицы `features`
 --
 
 INSERT INTO `features` (`feature_id`, `name`) VALUES
@@ -123,7 +123,28 @@ INSERT INTO `features` (`feature_id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `orders`
+-- Структура таблицы `options`
+--
+
+CREATE TABLE `options` (
+  `option_id` int(11) NOT NULL,
+  `name` varchar(30) NOT NULL,
+  `value` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `options`
+--
+
+INSERT INTO `options` (`option_id`, `name`, `value`) VALUES
+(6, 'site_name', 'Интернет-магазин "Яблочник"'),
+(7, 'site_decription', 'gg wp easy win'),
+(8, 'site_keywords', 'apple,цифровая электроника, блек-джек, шлюхи');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `orders`
 --
 
 CREATE TABLE `orders` (
@@ -133,7 +154,7 @@ CREATE TABLE `orders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `orders`
+-- Дамп данных таблицы `orders`
 --
 
 INSERT INTO `orders` (`order_id`, `client_id`, `user_id`) VALUES
@@ -143,7 +164,7 @@ INSERT INTO `orders` (`order_id`, `client_id`, `user_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `order_content`
+-- Структура таблицы `order_content`
 --
 
 CREATE TABLE `order_content` (
@@ -154,7 +175,7 @@ CREATE TABLE `order_content` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `order_content`
+-- Дамп данных таблицы `order_content`
 --
 
 INSERT INTO `order_content` (`position_id`, `order_id`, `product_id`, `quantiny`) VALUES
@@ -164,7 +185,7 @@ INSERT INTO `order_content` (`position_id`, `order_id`, `product_id`, `quantiny`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `products`
+-- Структура таблицы `products`
 --
 
 CREATE TABLE `products` (
@@ -179,7 +200,7 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `products`
+-- Дамп данных таблицы `products`
 --
 
 INSERT INTO `products` (`product_id`, `provider_id`, `caption`, `price`, `image`, `short_description`, `long_description`, `is_published`) VALUES
@@ -189,7 +210,7 @@ INSERT INTO `products` (`product_id`, `provider_id`, `caption`, `price`, `image`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_category`
+-- Структура таблицы `product_category`
 --
 
 CREATE TABLE `product_category` (
@@ -199,7 +220,7 @@ CREATE TABLE `product_category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `product_category`
+-- Дамп данных таблицы `product_category`
 --
 
 INSERT INTO `product_category` (`record_id`, `product_id`, `category_id`) VALUES
@@ -209,7 +230,7 @@ INSERT INTO `product_category` (`record_id`, `product_id`, `category_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_feature`
+-- Структура таблицы `product_feature`
 --
 
 CREATE TABLE `product_feature` (
@@ -219,10 +240,19 @@ CREATE TABLE `product_feature` (
   `value` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Дамп данных таблицы `product_feature`
+--
+
+INSERT INTO `product_feature` (`record_id`, `product_id`, `feature_id`, `value`) VALUES
+(1, 6, 2, '5 inch'),
+(2, 6, 1, 'black'),
+(3, 6, 4, '64 GB');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `provider`
+-- Структура таблицы `provider`
 --
 
 CREATE TABLE `provider` (
@@ -233,7 +263,7 @@ CREATE TABLE `provider` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `provider`
+-- Дамп данных таблицы `provider`
 --
 
 INSERT INTO `provider` (`provider_id`, `name`, `email`, `phone`) VALUES
@@ -244,7 +274,7 @@ INSERT INTO `provider` (`provider_id`, `name`, `email`, `phone`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Структура таблицы `users`
 --
 
 CREATE TABLE `users` (
@@ -258,16 +288,17 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `users`
+-- Дамп данных таблицы `users`
 --
 
 INSERT INTO `users` (`user_id`, `user_type`, `login`, `password`, `name`, `email`, `phone`) VALUES
-(1, 1, 'Curious', 'ae77900a23c50dd0a3bab3611307d04c', 'Максим', 'maxim.pereginka@outlook.com', '+380637218804');
+(1, 1, 'Curious', '2284783635c32da2a5bd96f1bca0c82f', 'Максим', 'maxim.pereginka@outlook.com', '+380637218804'),
+(23, 1, 'Shoshka', 'ae77900a23c50dd0a3bab3611307d04c', '', '', '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_type`
+-- Структура таблицы `user_type`
 --
 
 CREATE TABLE `user_type` (
@@ -276,7 +307,7 @@ CREATE TABLE `user_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `user_type`
+-- Дамп данных таблицы `user_type`
 --
 
 INSERT INTO `user_type` (`type_id`, `name`) VALUES
@@ -285,17 +316,17 @@ INSERT INTO `user_type` (`type_id`, `name`) VALUES
 (3, 'Менеджер');
 
 --
--- Indexes for dumped tables
+-- Индексы сохранённых таблиц
 --
 
 --
--- Indexes for table `callback_messages`
+-- Индексы таблицы `callback_messages`
 --
 ALTER TABLE `callback_messages`
   ADD PRIMARY KEY (`message_id`);
 
 --
--- Indexes for table `categories`
+-- Индексы таблицы `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`category_id`),
@@ -303,19 +334,25 @@ ALTER TABLE `categories`
   ADD UNIQUE KEY `category_id_2` (`category_id`);
 
 --
--- Indexes for table `clients`
+-- Индексы таблицы `clients`
 --
 ALTER TABLE `clients`
   ADD PRIMARY KEY (`client_id`);
 
 --
--- Indexes for table `features`
+-- Индексы таблицы `features`
 --
 ALTER TABLE `features`
   ADD PRIMARY KEY (`feature_id`);
 
 --
--- Indexes for table `orders`
+-- Индексы таблицы `options`
+--
+ALTER TABLE `options`
+  ADD PRIMARY KEY (`option_id`);
+
+--
+-- Индексы таблицы `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`order_id`),
@@ -323,113 +360,118 @@ ALTER TABLE `orders`
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `order_content`
+-- Индексы таблицы `order_content`
 --
 ALTER TABLE `order_content`
   ADD PRIMARY KEY (`position_id`),
   ADD KEY `order_id` (`order_id`,`product_id`);
 
 --
--- Indexes for table `products`
+-- Индексы таблицы `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`product_id`),
   ADD KEY `provider_id` (`provider_id`);
 
 --
--- Indexes for table `product_category`
+-- Индексы таблицы `product_category`
 --
 ALTER TABLE `product_category`
   ADD PRIMARY KEY (`record_id`),
   ADD KEY `product_id` (`product_id`,`category_id`);
 
 --
--- Indexes for table `product_feature`
+-- Индексы таблицы `product_feature`
 --
 ALTER TABLE `product_feature`
   ADD PRIMARY KEY (`record_id`),
   ADD KEY `product_id` (`product_id`,`feature_id`);
 
 --
--- Indexes for table `provider`
+-- Индексы таблицы `provider`
 --
 ALTER TABLE `provider`
   ADD PRIMARY KEY (`provider_id`);
 
 --
--- Indexes for table `users`
+-- Индексы таблицы `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
   ADD KEY `user_type` (`user_type`);
 
 --
--- Indexes for table `user_type`
+-- Индексы таблицы `user_type`
 --
 ALTER TABLE `user_type`
   ADD PRIMARY KEY (`type_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT для сохранённых таблиц
 --
 
 --
--- AUTO_INCREMENT for table `callback_messages`
+-- AUTO_INCREMENT для таблицы `callback_messages`
 --
 ALTER TABLE `callback_messages`
   MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT for table `categories`
+-- AUTO_INCREMENT для таблицы `categories`
 --
 ALTER TABLE `categories`
   MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT for table `clients`
+-- AUTO_INCREMENT для таблицы `clients`
 --
 ALTER TABLE `clients`
   MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT for table `features`
+-- AUTO_INCREMENT для таблицы `features`
 --
 ALTER TABLE `features`
   MODIFY `feature_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT for table `orders`
+-- AUTO_INCREMENT для таблицы `options`
+--
+ALTER TABLE `options`
+  MODIFY `option_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT для таблицы `orders`
 --
 ALTER TABLE `orders`
   MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT for table `order_content`
+-- AUTO_INCREMENT для таблицы `order_content`
 --
 ALTER TABLE `order_content`
   MODIFY `position_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT for table `products`
+-- AUTO_INCREMENT для таблицы `products`
 --
 ALTER TABLE `products`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
--- AUTO_INCREMENT for table `product_category`
+-- AUTO_INCREMENT для таблицы `product_category`
 --
 ALTER TABLE `product_category`
   MODIFY `record_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
--- AUTO_INCREMENT for table `product_feature`
+-- AUTO_INCREMENT для таблицы `product_feature`
 --
 ALTER TABLE `product_feature`
-  MODIFY `record_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `record_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT for table `provider`
+-- AUTO_INCREMENT для таблицы `provider`
 --
 ALTER TABLE `provider`
   MODIFY `provider_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
--- AUTO_INCREMENT for table `user_type`
+-- AUTO_INCREMENT для таблицы `user_type`
 --
 ALTER TABLE `user_type`
   MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
