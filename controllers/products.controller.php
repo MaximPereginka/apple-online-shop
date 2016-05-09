@@ -212,4 +212,46 @@ class ProductsController extends Controller
             }
         }
     }
+    
+    //Страница с категориями
+    public function administrator_categories(){
+        $this->data['categories'] = $this->model->getCategoriesList();
+
+        //Добавление новой категории
+        if($_POST){
+            $result = $this->model->add_category($_POST);
+            if($result){
+                Session::setMessage("Категория успешно добавлена");
+                Router::redirect("/administrator/products/categories");
+            }
+            else {
+                Session::setMessage("Ошибка создания категории");
+            }
+        }
+
+        //Удаление категории
+        if(isset($this->params[0]) && ($this->params[0] == 'delete')) {
+            if(isset($this->params[1])) {
+
+                //Подготовка базы - если категория назначена на товар, удаляем привязки
+                $result = $this->model->reset_category($this->params[1]);
+
+                if($result) {
+                    //Удаления категории из базы
+                    $result = $this->model->delete_category($this->params[1]);
+
+                    if($result) {
+                        Session::setMessage('Категория успешно удалена');
+                        Router::redirect('/administrator/products/categories');
+                    }
+                    else {
+                        Session::setMessage('Ошибка удаления категории');
+                    }
+                }
+                else {
+                    Session::setMessage("Не удалось удалить категорию");
+                }
+            }
+        }
+    }
 }

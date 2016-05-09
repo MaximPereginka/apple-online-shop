@@ -61,8 +61,7 @@ class Products extends Model
     //Метод возвращает все категории товаров магазина
     public function getCategoriesList(){
         //SQL Запрос
-        $sql = "SELECT *
-                FROM categories
+        $sql = "SELECT * FROM apple_store.categories
         ";
 
         //Выполняем запрос
@@ -345,6 +344,50 @@ class Products extends Model
 
             return $this->db->query($sql);
         }
+    }
+    
+    //Создаёт категорию
+    public function add_category($data){
+        if(!isset($data['name'])) return false;
+        else {
+            $name = $this->db->escape($data['name']);
+            $parent_id = '0';
+            if(isset($data['parent_id'])) $parent_id = $this->db->escape($data['parent_id']);
+            
+            $sql = "
+                INSERT INTO categories
+                (`name`, `parent_id`)
+                VALUES ('".$name."','".$parent_id."')
+            ";
+            
+            return $this->db->query($sql);
+        }
+    }
+
+    //Удаляет пары категория-товар по id категории
+    public function reset_category($id){
+        $id = (int)$id;
+
+        $sql = "
+            DELETE
+            FROM `product_category`
+            WHERE category_id = '".$id."'
+        ";
+
+        return $this->db->query($sql);
+    }
+
+    //Удаляет категорию
+    public function delete_category($id){
+        $id = (int)$id;
+
+        $sql = "
+            DELETE
+            FROM `categories`
+            WHERE category_id = '".$id."'
+        ";
+
+        return $this->db->query($sql);
     }
 }
 

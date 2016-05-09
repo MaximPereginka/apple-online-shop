@@ -1,0 +1,80 @@
+<section class="row">
+    <div class="container">
+        <h1>Категории товаров</h1>
+        <div class="add_category">
+            <form action="" method="post">
+                <input type="text" name="name" placeholder="Название категории" required>
+                <select name="parent_id">
+                    <option value="0">Нет родителя</option>
+
+                    <?php
+
+                        foreach($data['categories'] as $categories){
+
+                            ?>
+
+                                <option value="<?= $categories['category_id'] ?>"><?= $categories['name'] ?></option>
+
+                            <?php
+
+                        }
+
+                    ?>
+
+                </select>
+                <input type="submit" value="Создать">
+            </form>
+        </div>
+
+        <table rules="none">
+            <tr>
+                <th>ID</th>
+                <th>Название</th>
+            </tr>
+
+            <?php
+            $GLOBALS["row"] = 0;
+            $GLOBALS["data"] = $data['categories'];
+            $id = 0;
+            
+            //Рекурсивно выводит древо категорий
+            //Принимает id категории и выводит все её подкатегории
+            function get_children($id, $nesting){
+
+                //Выводим все подкатегории даной категории
+                foreach($GLOBALS["data"] as $categories){
+
+                    if($id == $categories['parent_id']) {
+                        $class = $GLOBALS["row"] % 2;
+                        $GLOBALS["row"]++;
+
+                        ?>
+
+                            <tr class="row-<?= $class ?> nesting-<?= $nesting ?>">
+                                <td><?= $categories['category_id'] ?></td>
+                                <td><?= $categories['name'] ?></td>
+                                <td>
+                                    <a href="/administrator/products/categories/delete/<?= $categories['category_id'] ?>" onclick="return confirmDeleteCategory()">Удалить</a>
+                                </td>
+                            </tr>
+
+                        <?php
+
+                        //Проверяем, есть ли у даной категории подкатегории
+                        $has_children = false;
+                        foreach($GLOBALS["data"] as $cat) {
+                            if($cat['parent_id'] == $categories['category_id']) $has_children = true;
+                        }
+                        if($has_children) get_children($categories['category_id'], $nesting + 1);
+                    }
+                }
+            }
+
+            //Начальный уровень вложенности - нет родителя
+            $nesting = 0;
+            get_children(0, $nesting);
+            ?>
+
+        </table>
+    </div>
+</section>
