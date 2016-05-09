@@ -31,3 +31,13 @@ function confirmDeleteUsers() {
         return false;
     }
 }
+
+//Предупреждает об удалении поставщиков
+function confirmDeleteProvider() {
+    if(confirm("Вы действительно хотите удалить этого пользователя?")) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}

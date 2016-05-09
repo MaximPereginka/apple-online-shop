@@ -169,4 +169,47 @@ class ProductsController extends Controller
             }
         }
     }
+
+    //Страница с поставщиками
+    public function administrator_providers(){
+        $this->data['providers'] = $this->model->getProviders();
+
+        //Добавление нового поставщика
+        if($_POST) {
+            $result = $this->model->add_provider($_POST);
+            
+            if($result) {
+                Session::setMessage("Поставщик успешно добавлен");
+                Router::redirect("/administrator/products/providers");
+            }
+            else {
+                Session::setMessage("Ошибка создания поставщика");
+            }
+        }
+        
+        //Удаление поставщика
+        if(isset($this->params[0]) && ($this->params[0] == 'delete')) {
+            if(isset($this->params[1]) && ($this->params[1] != '1')) {
+
+                //Подготовка базы - если поставщик назначен на товар, товару присваивается поставщик "не определен"
+                $result = $this->model->reset_providers($this->params[1]);
+
+                if($result) {
+                    //Удаления поставщика из базы
+                    $result = $this->model->delete_provider($this->params[1]);
+
+                    if($result) {
+                        Session::setMessage('Поставщик успешно удалён');
+                        Router::redirect('/administrator/products/providers');
+                    }
+                    else {
+                        Session::setMessage('Ошибка удаления поставщика');
+                    }
+                }
+                else {
+                    Session::setMessage("Не удалось удалить поставщика");
+                }
+            }
+        }
+    }
 }

@@ -106,7 +106,7 @@ class Products extends Model
 
     //Возвращает список поставщиков
     public function getProviders(){
-        $sql = "SELECT provider.provider_id, provider.name
+        $sql = "SELECT *
                 FROM provider
                 WHERE 1
         ";
@@ -298,4 +298,53 @@ class Products extends Model
                ";
         return $this->db->query($sql);
     }
+
+    //Удаляет поставщика по его id
+    public function delete_provider($id){
+        $id = (int)$id;
+
+        $sql = "
+            DELETE FROM provider
+            WHERE provider_id = '".$id."'
+        ";
+
+        return $this->db->query($sql);
+    }
+
+    //Принимает id поставщика
+    //Если поставщик назначен на товар, товару назначется поставщик "Не определен"
+    public function reset_providers($id) {
+        $id = (int)$id;
+
+        $sql = "
+            UPDATE products
+            SET provider_id = '1'
+            WHERE provider_id = '".$id."'
+        ";
+
+        return $this->db->query($sql);
+    }
+
+    //Создаёт нового поставщика
+    public function add_provider($data){
+        if(!isset($data['provider_name'])) {
+            return false;
+        }
+        else {
+            $name = $this->db->escape($data['provider_name']);
+            $email = "undefined";
+            $phone = "undefined";
+            if(isset($data['email'])) $email = $this->db->escape($data['email']);
+            if(isset($data['phone'])) $phone = $this->db->escape($data['phone']);
+
+            $sql = "
+                INSERT INTO provider
+                (`name`, `email`, `phone`)
+                VALUES ('".$name."','".$email."','".$phone."')
+            ";
+
+            return $this->db->query($sql);
+        }
+    }
 }
+

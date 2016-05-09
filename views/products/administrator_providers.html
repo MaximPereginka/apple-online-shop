@@ -1,0 +1,48 @@
+<section class="row">
+    <div class="container">
+        <h1>Поставщики</h1>
+        <div class="add_provider">
+            <form action="" method="post">
+                <input name="provider_name" placeholder="Название поставщика" type="text" required>
+                <input name="email" placeholder="Email" type="email">
+                <input name="phone" placeholder="Номер телефона" type="text">
+                <input type="submit" value="Добавить">
+            </form>
+        </div>
+        <table rules="none">
+            <tr>
+                <th>ID</th>
+                <th>Название</th>
+                <th>Email</th>
+                <th>Номер телефона</th>
+            </tr>
+
+            <?php
+                $k = 0;
+
+                foreach($data['providers'] as $providers) {
+
+                    if($providers['provider_id'] == 1) continue;
+
+                    $class = $k % 2;
+                    $k++;
+
+                    ?>
+
+            <tr class="row-<?php echo $class ?>">
+                <td><?php echo $providers['provider_id'] ?></td>
+                <td><?php echo $providers['name'] ?></td>
+                <td><?php echo $providers['email'] ?></td>
+                <td><?php echo $providers['phone'] ?></td>
+                <td><a onclick="return confirmDeleteProvider()" href="/administrator/products/providers/delete/<?php echo $providers['provider_id'] ?>" class="delete-button">Удалить</a></td>
+            </tr>
+
+            <?php
+
+                }
+            ?>
+
+
+        </table>
+    </div>
+</section>
