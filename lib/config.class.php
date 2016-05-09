@@ -24,4 +24,29 @@ class Config
     public static function set($key, $value) {
          self::$settings[$key] = $value;
     }
+
+    //Получает настройки с БД
+    public static function get_options_from_database(){
+        $connection = new mysqli(Config::get('db.host'), Config::get('db.user'), Config::get('db.password'), Config::get('db.name'));
+
+        //Устанавливаем кодировку
+        $connection->set_charset("utf8");
+
+        $sql = "SELECT * FROM options";
+
+        $result = $connection->query($sql);
+
+        if(is_bool($result)) {
+            return $result;
+        }
+
+        //Записываем полученные данные запроса в массив
+        $data = array();
+        while($row = mysqli_fetch_assoc($result)) {
+            $data[] = $row;
+        }
+
+        //Возвращаем результаты запроса
+        return $data;
+    }
 }
