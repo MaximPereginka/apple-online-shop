@@ -63,7 +63,10 @@
                         //Проверяем, есть ли у даной категории подкатегории
                         $has_children = false;
                         foreach($GLOBALS["data"] as $cat) {
-                            if($cat['parent_id'] == $categories['category_id']) $has_children = true;
+                            if($cat['parent_id'] == $categories['category_id']) {
+                                $has_children = true;
+                                break;
+                            }
                         }
                         if($has_children) get_children($categories['category_id'], $nesting + 1);
                     }
