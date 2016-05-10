@@ -11,7 +11,7 @@
                 <input type="hidden" name="action" value="change-main-info">
                 <input type="hidden" name="order_id" value="<?= $data['order'][0]['order_id'] ?>">
                 <p><b>ID Заказа: </b><?= $data['order'][0]['order_id'] ?></p>
-                <p><b>Клиент: </b><a href="/administrator/customers/edit/<?= $data['order'][0]['client_id'] ?>"><?= $data['order'][0]['client_name'] ?> <?= $data['order'][0]['surname'] ?></a></p>
+                <p><b>Клиент: </b><a href="/administrator/customers/view/<?= $data['order'][0]['client_id'] ?>"><?= $data['order'][0]['client_name'] ?> <?= $data['order'][0]['surname'] ?></a></p>
                 <p><b>Менеджер: </b>
                     <select name="user_id" required>
                         <?php

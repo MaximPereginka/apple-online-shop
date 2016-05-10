@@ -42,7 +42,15 @@ Class Customers extends Model
 
     //Возвращает количество заказов
     public function count_orders(){
-        $sql = "SELECT COUNT(order_id) as order_count FROM apple_store.orders;";
+        $sql = "
+            SELECT COUNT(orders.order_id) as order_count
+            FROM orders, order_status, users, clients, products, order_content
+            WHERE (orders.status_id = order_status.status_id) 
+                AND (users.user_id = orders.user_id)
+                    AND (clients.client_id = orders.client_id)
+                        AND (orders.order_id = order_content.order_id)
+                            AND (order_content.product_id = products.product_id)
+        ";
 
         return $this->db->query($sql);
     }
