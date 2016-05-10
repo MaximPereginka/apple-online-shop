@@ -122,7 +122,7 @@
                     <tr class="'.$class.'">
             <td>'.$data['product_features'][$k]['name'].'</td>
             <td>'.$data['product_features'][$k]['value'].'</td>
-            <td class="right-align"><a class="button transparent-button" href="/administrator/products/view" href="/administrator/products/edit/'.$data['product']['product_id'].'/deleteFeature/'.$data['product_features'][$k]['feature_id'].'">Удалить</a></td>
+            <td class="right-align"><a class="button transparent-button" href="/administrator/products/edit/'.$data['product']['product_id'].'/deleteFeature/'.$data['product_features'][$k]['feature_id'].'">Удалить</a></td>
             </tr>
             ';
             }
@@ -145,7 +145,7 @@
 
                 </select>
                 <input class="inputs" type="text" name="new_feature_value" placeholder="Введите значение" required>
-                <input class="button orange-button" href="/administrator/products/view" type="submit" value="Добавить/перезаписать характеристику">
+                <input class="button orange-button" type="submit" value="Добавить/перезаписать характеристику">
             </form>
         </div>
     </div>
