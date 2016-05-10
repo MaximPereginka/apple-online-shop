@@ -61,3 +61,13 @@ function confirmDeleteFeature() {
         return false;
     }
 }
+
+//Предупреждает об удалении категорий
+function confirmDeleteOrder() {
+    if(confirm("Вы действительно хотите удалить этот заказ?")) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}

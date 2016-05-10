@@ -1,0 +1,102 @@
+<section class="row">
+    <div class="container">
+        <div class="button-bar">
+            <a href="/administrator/customers/orders">К списку заказов</a>
+        </div>
+
+        <h1>Просмотр заказа</h1>
+
+        <div class="edit_form">
+            <form action="" method="post">
+                <input type="hidden" name="action" value="change-main-info">
+                <input type="hidden" name="order_id" value="<?= $data['order'][0]['order_id'] ?>">
+                <p><b>ID Заказа: </b><?= $data['order'][0]['order_id'] ?></p>
+                <p><b>Клиент: </b><a href="/administrator/customers/edit/<?= $data['order'][0]['client_id'] ?>"><?= $data['order'][0]['client_name'] ?> <?= $data['order'][0]['surname'] ?></a></p>
+                <p><b>Менеджер: </b>
+                    <select name="user_id" required>
+                        <?php
+
+                            foreach($data['managers'] as $manager) {
+
+                            ?>
+
+                                <option value="<?= $manager['user_id'] ?>" <?php if($manager['user_id'] == $data['order'][0]['user_id']) echo "selected"?>><?= $manager['login'] ?></option>
+
+                            <?php
+
+                            }
+
+                        ?>
+
+                    </select>
+                </p>
+                <p><b>Статус: </b>
+                    <select name="status_id" required>
+
+                        <?php
+
+                            foreach($data['statuses'] as $status) {
+
+                        ?>
+
+                        <option value="<?= $status['status_id'] ?>" <?php if($status['status_id'] == $data['order'][0]['status_id']) echo "selected"?>><?= $status['name'] ?></option>
+
+                        <?php
+
+                            }
+
+                        ?>
+
+                    </select>
+                </p>
+                <p><b>Дата создания: </b><?= $data['order'][0]['date_created'] ?></p>
+                <p><input type="submit" value="Сохранить"></p>
+            </form>
+        </div>
+
+        <div class="product_content">
+
+            <table>
+                <tr>
+                    <th>ID Товара</th>
+                    <th>Название</th>
+                    <th>Цена за единицу товара</th>
+                    <th>Количество</th>
+                    <th>Общая стоимость</th>
+                </tr>
+
+                <?php
+                $total_price = 0;
+                $row = 0;
+
+                foreach($data['order_content'] as $content) {
+
+                    $class = $row % 2;
+                    $row++;
+                    $price = $content['quantity'] * $content['price'];
+                    $total_price += $price;
+
+                ?>
+
+                    <tr>
+                        <td><?= $content['product_id']?></td>
+                        <td><?= $content['caption']?></td>
+                        <td><?= $content['price']?> грн.</td>
+                        <td><?= $content['quantity']?></td>
+                        <td><?= $price ?> грн.</td>
+                    </tr>
+
+                <?php
+
+                }
+
+                ?>
+
+                <tr>
+                    <td colspan="4">Всего:</td>
+                    <td><?= $total_price ?> грн.</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</section>

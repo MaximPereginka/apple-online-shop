@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Май 09 2016 г., 20:36
+-- Время создания: Май 10 2016 г., 02:40
 -- Версия сервера: 10.1.13-MariaDB
 -- Версия PHP: 5.6.20
 
@@ -163,8 +163,7 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`order_id`, `client_id`, `user_id`, `status_id`, `date_created`) VALUES
-(1, 1, 2, 1, '2016-05-09 20:52:24'),
-(2, 2, 2, 1, '2016-05-09 20:52:24');
+(1, 1, 24, 3, '2016-05-09 20:52:24');
 
 -- --------------------------------------------------------
 
@@ -176,16 +175,15 @@ CREATE TABLE `order_content` (
   `position_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `quantiny` int(3) NOT NULL
+  `quantity` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `order_content`
 --
 
-INSERT INTO `order_content` (`position_id`, `order_id`, `product_id`, `quantiny`) VALUES
-(1, 1, 1, 3),
-(2, 1, 2, 5);
+INSERT INTO `order_content` (`position_id`, `order_id`, `product_id`, `quantity`) VALUES
+(1, 1, 6, 3);
 
 -- --------------------------------------------------------
 
@@ -316,6 +314,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_type`, `login`, `password`, `name`, `email`, `phone`) VALUES
+(0, 3, 'Не назначен', '0000', 'Не назначен', '', ''),
 (1, 1, 'Curious', '2284783635c32da2a5bd96f1bca0c82f', 'Максим', 'maxim.pereginka@outlook.com', '+380637218804'),
 (23, 1, 'Shoshka', 'ae77900a23c50dd0a3bab3611307d04c', '', '', ''),
 (24, 3, 'user24', '052883054635aeadd004651610465e30', '', '', '');
@@ -506,7 +505,7 @@ ALTER TABLE `provider`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT для таблицы `user_type`
 --

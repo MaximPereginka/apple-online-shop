@@ -1,0 +1,64 @@
+<section class="row">
+    <div class="container">
+        <h1>Заказы</h1>
+        <table rules="none">
+            <tr>
+                <th>ID</th>
+                <th>Имя заказчика</th>
+                <th>Номер телефона</th>
+                <th>Сумма заказа</th>
+                <th>Менеджер</th>
+                <th>Статус</th>
+            </tr>
+
+            <?php
+                $k = 0;
+
+                foreach($data['orders'] as $order) {
+
+                    $class = $k % 2;
+                    $k++;
+
+                    ?>
+
+            <tr class="row-<?php echo $class ?>">
+                <td><?php echo $order['order_id'] ?></td>
+                <td><?php echo $order['client_name'] ?></td>
+                <td><?php echo $order['phone'] ?></td>
+                <td><?php echo $order['order_price'] ?> грн.</td>
+                <td><?php echo $order['login'] ?></td>
+                <td><?php echo $order['name'] ?></td>
+                <td><a href="/administrator/customers/edit_order/<?php echo $order['order_id'] ?>">Подробнее</a></td>
+                <td><a onclick="return confirmDeleteOrder()" href="/administrator/customers/orders/delete/<?php echo $order['order_id'] ?>" class="delete-button">Удалить</a></td>
+
+            </tr>
+
+            <?php
+
+                }
+            ?>
+        </table>
+
+        <!-- ============= NAVIGATION ================ -->
+        <nav class="pages">
+            <h2>Страницы</h2>
+            <ul>
+
+                <?php
+
+                for($i = 1; $i <= $data['pages_required']; $i++) {
+
+                ?>
+
+                    <li><a href="/administrator/customers/orders/page/<?= $i ?>"><?= $i ?></a></li>
+
+                <?php
+
+                }
+
+                ?>
+
+            </ul>
+        </nav>
+    </div>
+</section>

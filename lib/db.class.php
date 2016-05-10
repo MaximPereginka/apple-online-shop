@@ -58,6 +58,15 @@ class DB
         return $data;
     }
 
+    //Возвращает идентификатор подключения к BD
+    public function get_connection(){
+        //Проверяем, удалось ли подключиться к БД
+        if (!$this->connection) {
+            return false;
+        }
+        else return $this->connection;
+    }
+    
     //Защита от SQL иньекций
     //Принимает строку
     //Возвращает безопасную строку
