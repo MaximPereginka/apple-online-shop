@@ -353,12 +353,22 @@ class Products extends Model
             $name = $this->db->escape($data['name']);
             $parent_id = '0';
             if(isset($data['parent_id'])) $parent_id = $this->db->escape($data['parent_id']);
-            
-            $sql = "
-                INSERT INTO categories
-                (`name`, `parent_id`)
-                VALUES ('".$name."','".$parent_id."')
-            ";
+
+            if($data['parent_id'] == 0) {
+                $sql = "
+                    INSERT INTO categories
+                    (`name`, `parent_id`,`has_parent`)
+                    VALUES ('".$name."','".$parent_id."','0')
+                ";
+            }
+            else {
+                $sql = "
+                    INSERT INTO categories
+                    (`name`, `parent_id`, `has_parent`)
+                    VALUES ('".$name."','".$parent_id."','1')
+                ";
+            }
+
             
             return $this->db->query($sql);
         }
