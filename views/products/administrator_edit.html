@@ -6,7 +6,7 @@
         </div>
 
         <h2>Редактирование товара</h2>
-
+        
         <!-- ============== Главная информация о товаре ================= -->
         <form class="product-details" action="" method="post">
             <div class="info">
@@ -20,18 +20,16 @@
                         <p><b>Цена: </b><input type="text" name="price" value="<?php echo $data['product']['price'] ?>"></p>
                         <p><b>Поставщик: </b>
                             <select name="provider_id">
-                                <option value="<?php echo $data['product']['provider_id'] ?>" selected><?php
-
-                                $current_id = $data['product']['provider_id'] - 1;
-                                echo $data['providers'][$current_id]['name']
-
-                                ?></option>
 
                                 <?php
                                     foreach($data['providers'] as $provider) {
-                                        if ($data['product']['provider_id'] != $provider['provider_id']) {
-                                            echo '<option value="'.$provider['provider_id'].'">'.$provider['name'].'</option>';
-                                        }
+
+                                    ?>
+
+                                    <option value="<?= $provider['provider_id']?>" <?php if($provider['provider_id'] == $data['product']['provider_id']) echo "selected"?>><?= $provider['name']?></option>
+
+                                    <?php
+
                                     }
                                 ?>
 
