@@ -61,9 +61,9 @@ header.administrator {
 
 /*--------------------MESSAGE------------------------*/
 section.administrator-message {
-  background: #f9f9f9; }
+  background: #1E90FF; }
   section.administrator-message .container p {
-    color: #333333;
+    color: #FFFFFF;
     text-align: center;
     font-weight: bold; }
 
@@ -160,7 +160,6 @@ section.administrator-products-list {
       section.administrator-products-list .container .products .product .product-actions a.delete:hover {
         color: #FFFFFF; }
 
-/*----------------- Products's editing -------------------*/
 /*---------------- Empty line -----------------------*/
 div.empty {
   display: block;
@@ -172,7 +171,8 @@ footer.administrator {
   background: #333333;
   font-family: "Segoe UI";
   position: fixed;
-  bottom: 0; }
+  bottom: 0;
+  opacity: 0.95; }
   footer.administrator .container p {
     color: #FFFFFF;
     padding: 20px;
@@ -259,5 +259,108 @@ footer.administrator {
     section.administrator-actions .container .col-3 {
       width: 150px;
       margin-left: 50px; } }
+/*-------------------- Mutual styles -------------------------*/
+/*-------------------- Buttons --------------------------------*/
+.button {
+  border: 1px solid #FF7F00;
+  padding: 8px 16px;
+  text-decoration: none;
+  outline: none;
+  font-size: 90%;
+  transition: 0.25s ease all;
+  text-transform: uppercase; }
+  .button:hover {
+    border: 1px solid #32CD32;
+    background: #32CD32;
+    color: #FFFFFF; }
+
+.transparent-button {
+  color: #FF7F00;
+  background: none; }
+
+.orange-button {
+  color: #FFFFFF;
+  background-color: #FF7F00; }
+
+/*------------------------ Form block --------------------------------*/
+.form-block {
+  background: #eee;
+  margin: 0 20px 20px;
+  padding: 10px; }
+  .form-block h3 {
+    margin: 0 0 20px;
+    color: #333; }
+  .form-block .inputs {
+    height: 35px;
+    padding: 2px 4px;
+    font-size: 90%;
+    font-color: #444; }
+  .form-block p:last-child {
+    margin-bottom: 0; }
+
+/*----------------------- Page headline ----------------------------*/
+.page-headline h1, .page-headline h2, .page-headline h3 {
+  text-align: center;
+  color: #333333; }
+
+/*------------------------ Striped table ------------------------------------------*/
+table.striped-table {
+  margin: 20px;
+  width: calc(100% - 40px); }
+  table.striped-table tr {
+    height: 44px; }
+    table.striped-table tr td, table.striped-table tr th {
+      padding: 0px 10px; }
+    table.striped-table tr td.right-align {
+      text-align: right; }
+    table.striped-table tr td {
+      color: #444;
+      padding-top: 4px;
+      padding-bottom: 4px; }
+    table.striped-table tr td.nesting-1 {
+      padding-left: 40px; }
+    table.striped-table tr td.nesting-2 {
+      padding-left: 80px; }
+    table.striped-table tr td.nesting-3 {
+      padding-left: 160px; }
+    table.striped-table tr td.nesting-4 {
+      padding-left: 320px; }
+    table.striped-table tr td.nesting-5 {
+      padding-left: 640px; }
+  table.striped-table tr.row-0 {
+    background: #fafafa; }
+  table.striped-table tr.row-1 {
+    background: #eee; }
+  table.striped-table tr.top-row {
+    color: #FFFFFF;
+    background: #444; }
+    table.striped-table tr.top-row th {
+      text-align: left; }
+  table.striped-table tr.new {
+    background: #B3EE3A;
+    border-bottom: 1px dotted #444; }
+  table.striped-table tr.total {
+    background: #FFA500; }
+    table.striped-table tr.total td {
+      color: #FFFFFF;
+      font-weight: bold; }
+
+/*---------------------- Top navigation ---------------------------*/
+.button-bar {
+  padding: 20px 0;
+  text-align: center;
+  background: #fafafa; }
+
+/*------------------------- Pages navigation -------------------------*/
+nav.pages-navigation ul {
+  text-align: center;
+  padding: 0; }
+  nav.pages-navigation ul li {
+    display: inline-block;
+    list-style: none;
+    padding: 5px;
+    margin: 0px; }
+    nav.pages-navigation ul li a {
+      color: #444; }
 
 /*# sourceMappingURL=style.css.map */

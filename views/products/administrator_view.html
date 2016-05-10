@@ -17,19 +17,19 @@
     for($i = 0; $i < $n; $i++) {
 ?>
 
-        <div class="product row-<?php echo $i%2 ?>">
-            <img src="<?php echo $data['products-list'][$i]['image'] ?>" alt="$data['products-list'][$i]['caption']" />
-            <div class="description">
-                <p><b>ID: </b><?php echo $data['products-list'][$i]['product_id'] ?></p>
-                <p><b>Название: </b><?php echo $data['products-list'][$i]['caption'] ?></p>
-                <p><b>Цена: </b><?php echo $data['products-list'][$i]['price'] ?> грн.</p>
-                <p><b>Описание: </b><?php echo $data['products-list'][$i]['short_description'] ?>...</p>
+            <div class="product row-<?php echo $i%2 ?>">
+                <img src="<?php echo $data['products-list'][$i]['image'] ?>" alt="$data['products-list'][$i]['caption']" />
+                <div class="description">
+                    <p><b>ID: </b><?php echo $data['products-list'][$i]['product_id'] ?></p>
+                    <p><b>Название: </b><?php echo $data['products-list'][$i]['caption'] ?></p>
+                    <p><b>Цена: </b><?php echo $data['products-list'][$i]['price'] ?> грн.</p>
+                    <p><b>Описание: </b><?php echo $data['products-list'][$i]['short_description'] ?>...</p>
+                </div>
+                <div class="product-actions">
+                    <a onclick="" href="/administrator/products/edit/<?php echo $data['products-list'][$i]['product_id'] ?>">Редактировать</a>
+                    <a onclick="return confirmDeleteProduct()" class="delete" href="/administrator/products/delete/<?php echo $data['products-list'][$i]['product_id'] ?>">Удалить</a>
+                </div>
             </div>
-            <div class="product-actions">
-                <a onclick="" href="/administrator/products/edit/<?php echo $data['products-list'][$i]['product_id'] ?>">Редактировать</a>
-                <a onclick="return confirmDeleteProduct()" class="delete" href="/administrator/products/delete/<?php echo $data['products-list'][$i]['product_id'] ?>">Удалить</a>
-            </div>
-        </div>
 
 <?php } ?>
 

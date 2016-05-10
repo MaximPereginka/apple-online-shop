@@ -1,19 +1,21 @@
 <section class="row">
     <div class="container">
         <div class="button-bar">
-            <a href="/administrator/customers/orders">К списку заказов</a>
+            <a class="button orange-button" href="/administrator/customers/orders">К списку заказов</a>
         </div>
 
-        <h1>Просмотр заказа</h1>
+        <div class="page-headline">
+            <h2>Просмотр заказа</h2>
+        </div>
 
-        <div class="edit_form">
+        <div class="form-block">
             <form action="" method="post">
                 <input type="hidden" name="action" value="change-main-info">
                 <input type="hidden" name="order_id" value="<?= $data['order'][0]['order_id'] ?>">
                 <p><b>ID Заказа: </b><?= $data['order'][0]['order_id'] ?></p>
-                <p><b>Клиент: </b><a href="/administrator/customers/view/<?= $data['order'][0]['client_id'] ?>"><?= $data['order'][0]['client_name'] ?> <?= $data['order'][0]['surname'] ?></a></p>
+                <p><b>Клиент: </b><a target="_blank" href="/administrator/customers/view/<?= $data['order'][0]['client_id'] ?>"><?= $data['order'][0]['client_name'] ?> <?= $data['order'][0]['surname'] ?></a></p>
                 <p><b>Менеджер: </b>
-                    <select name="user_id" required>
+                    <select class="inputs" name="user_id" required>
                         <?php
 
                             foreach($data['managers'] as $manager) {
@@ -31,7 +33,7 @@
                     </select>
                 </p>
                 <p><b>Статус: </b>
-                    <select name="status_id" required>
+                    <select class="inputs" name="status_id" required>
 
                         <?php
 
@@ -50,53 +52,49 @@
                     </select>
                 </p>
                 <p><b>Дата создания: </b><?= $data['order'][0]['date_created'] ?></p>
-                <p><input type="submit" value="Сохранить"></p>
+                <p><input class="button orange-button" type="submit" value="Сохранить"></p>
             </form>
         </div>
+        <table class="striped-table" rules="none">
+            <tr class="top-row">
+                <th>ID Товара</th>
+                <th>Название</th>
+                <th>Цена за единицу товара</th>
+                <th>Количество</th>
+                <th>Общая стоимость</th>
+            </tr>
 
-        <div class="product_content">
+            <?php
+            $total_price = 0;
+            $row = 0;
 
-            <table>
-                <tr>
-                    <th>ID Товара</th>
-                    <th>Название</th>
-                    <th>Цена за единицу товара</th>
-                    <th>Количество</th>
-                    <th>Общая стоимость</th>
+            foreach($data['order_content'] as $content) {
+
+                $class = $row % 2;
+                $row++;
+                $price = $content['quantity'] * $content['price'];
+                $total_price += $price;
+
+            ?>
+
+                <tr class="row-<?= $class ?>">
+                    <td><?= $content['product_id']?></td>
+                    <td><?= $content['caption']?></td>
+                    <td><?= $content['price']?> грн.</td>
+                    <td><?= $content['quantity']?></td>
+                    <td><?= $price ?> грн.</td>
                 </tr>
 
-                <?php
-                $total_price = 0;
-                $row = 0;
+            <?php
 
-                foreach($data['order_content'] as $content) {
+            }
 
-                    $class = $row % 2;
-                    $row++;
-                    $price = $content['quantity'] * $content['price'];
-                    $total_price += $price;
+            ?>
 
-                ?>
-
-                    <tr>
-                        <td><?= $content['product_id']?></td>
-                        <td><?= $content['caption']?></td>
-                        <td><?= $content['price']?> грн.</td>
-                        <td><?= $content['quantity']?></td>
-                        <td><?= $price ?> грн.</td>
-                    </tr>
-
-                <?php
-
-                }
-
-                ?>
-
-                <tr>
-                    <td colspan="4">Всего:</td>
-                    <td><?= $total_price ?> грн.</td>
-                </tr>
-            </table>
-        </div>
+            <tr class="total">
+                <td colspan="4">Всего:</td>
+                <td><?= $total_price ?> грн.</td>
+            </tr>
+        </table>
     </div>
 </section>

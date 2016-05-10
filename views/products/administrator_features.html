@@ -1,16 +1,19 @@
 <section class="row">
     <div class="container">
-        <h1>Характеристики товаров</h1>
-        <div>
+        <div class="page-headline">
+            <h2>Характеристики товаров</h2>
+        </div>
+        <div class="form-block">
             <form action="" method="post">
-                <input name="feature_name" placeholder="Название характеристики" type="text" required>
-                <input type="submit" value="Добавить">
+                <input class="inputs" name="feature_name" placeholder="Название характеристики" type="text" required>
+                <input class="button orange-button" type="submit" value="Добавить">
             </form>
         </div>
-        <table rules="none">
-            <tr>
+        <table class="striped-table" rules="none">
+            <tr class="top-row">
                 <th>ID</th>
                 <th>Название</th>
+                <th>&nbsp;</th>
             </tr>
 
             <?php
@@ -26,7 +29,7 @@
             <tr class="row-<?php echo $class ?>">
                 <td><?php echo $features['feature_id'] ?></td>
                 <td><?php echo $features['name'] ?></td>
-                <td><a onclick="return confirmDeleteFeature()" href="/administrator/products/features/delete/<?php echo $features['feature_id'] ?>" class="delete-button">Удалить</a></td>
+                <td class="right-align"><a class="button transparent-button" onclick="return confirmDeleteFeature()" href="/administrator/products/features/delete/<?php echo $features['feature_id'] ?>" class="delete-button">Удалить</a></td>
             </tr>
 
             <?php

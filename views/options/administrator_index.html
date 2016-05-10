@@ -1,13 +1,15 @@
 <section class="row">
     <div class="container">
-        <h1>Настройки сайта</h1>
-        <div class="form__block">
-            <h2>SEO Оптимизация</h2>
+        <div class="page-headline">
+            <h2>Настройки сайта</h2>
+            <h3>SEO Оптимизация</h3>
+        </div>
+        <div class="form-block">
             <form action="" method="post">
-                <p><b>Название сайта: </b><input type="text" name="site_name" value="<?= htmlspecialchars($data['options'][0]['value']) ?>"></p>
-                <p><b>Описание сайта: </b><input type="text" name="site_description" value="<?= htmlspecialchars($data['options'][1]['value']) ?>"></p>
-                <p><b>Ключевые слова: </b><input type="text" name="site_keywords" value="<?= htmlspecialchars($data['options'][2]['value']) ?>"></p>
-                <p><input type="submit" value="Сохранить"></p>
+                <p><b>Название сайта: </b><input class="inputs" type="text" name="site_name" value="<?= htmlspecialchars($data['options'][0]['value']) ?>" placeholder="Введите название сайта" required></p>
+                <p><b>Описание сайта: </b><input class="inputs" type="text" name="site_description" value="<?= htmlspecialchars($data['options'][1]['value']) ?>" placeholder="Введите описание сайта" required></p>
+                <p><b>Ключевые слова: </b><input class="inputs" type="text" name="site_keywords" value="<?= htmlspecialchars($data['options'][2]['value']) ?>" placeholder="Введите ключевые слова сайта" required></p>
+                <p><input class="button orange-button" type="submit" value="Сохранить"></p>
             </form>
         </div>
     </div>

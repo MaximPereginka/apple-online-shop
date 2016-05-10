@@ -1,10 +1,12 @@
 <section class="row">
     <div class="container">
-        <h1>Категории товаров</h1>
-        <div class="add_category">
+        <div class="page-headline">
+            <h2>Категории товаров</h2>
+        </div>
+        <div class="form-block">
             <form action="" method="post">
-                <input type="text" name="name" placeholder="Название категории" required>
-                <select name="parent_id">
+                <input class="inputs" type="text" name="name" placeholder="Название категории" required>
+                <select class="inputs" name="parent_id">
                     <option value="0">Нет родителя</option>
 
                     <?php
@@ -22,14 +24,15 @@
                     ?>
 
                 </select>
-                <input type="submit" value="Создать">
+                <input class="button orange-button" type="submit" value="Создать">
             </form>
         </div>
 
-        <table rules="none">
-            <tr>
-                <th>ID</th>
+        <table class="striped-table" rules="none">
+            <tr class="top-row">
+                <th>ID Категории</th>
                 <th>Название</th>
+                <th>&nbsp;</th>
             </tr>
 
             <?php
@@ -50,11 +53,11 @@
 
                         ?>
 
-                            <tr class="row-<?= $class ?> nesting-<?= $nesting ?>">
+                            <tr class="row-<?= $class ?>">
                                 <td><?= $categories['category_id'] ?></td>
-                                <td><?= $categories['name'] ?></td>
-                                <td>
-                                    <a href="/administrator/products/categories/delete/<?= $categories['category_id'] ?>" onclick="return confirmDeleteCategory()">Удалить</a>
+                                <td class="nesting-<?= $nesting ?>"><?= $categories['name'] ?></td>
+                                <td class="right-align">
+                                    <a class="button transparent-button" href="/administrator/products/categories/delete/<?= $categories['category_id'] ?>" onclick="return confirmDeleteCategory()">Удалить</a>
                                 </td>
                             </tr>
 

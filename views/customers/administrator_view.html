@@ -1,12 +1,14 @@
 <section class="row">
     <div class="container">
         <div class="button-bar">
-            <a href="/administrator/customers">К списку клиентов</a>
+            <a class="button orange-button" href="/administrator/customers">К списку клиентов</a>
         </div>
 
-        <h1>Информация о клиенте</h1>
-        <div class="information-block">
-            <h2>Личные данные</h2>
+        <div class="page-headline">
+            <h2>Информация о клиенте</h2>
+            <h3>Личные данные</h3>
+        </div>
+        <div class="form-block">
             <p><b>ID Клиента: </b><?= $data['client'][0]['client_id']?></p>
             <p><b>Имя: </b><?= $data['client'][0]['name']?></p>
             <p><b>Фамилия: </b><?= $data['client'][0]['surname']?></p>
@@ -14,9 +16,11 @@
             <p><b>Номер телефона: </b><?= $data['client'][0]['phone']?></p>
             <p><b>Примечания: </b><?= $data['client'][0]['notes']?></p>
         </div>
-        <table rules="none">
-            <h2>Заказы</h2>
-            <tr>
+        <div class="page-headline">
+            <h3>Заказы</h3>
+        </div>
+        <table class="striped-table" rules="none">
+            <tr class="top-row">
                 <th>ID Заказа</th>
                 <th>Менеджер</th>
                 <th>Статус</th>
@@ -30,10 +34,12 @@
 
                     $class = $k % 2;
                     $k++;
+                    $status = "";
+                    if($order['name'] == "Не обработан") $status = "new";
 
                     ?>
 
-            <tr class="row-<?php echo $class ?>">
+            <tr class="row-<?php echo $class . " " . $status ?>">
                 <td><a target="_blank" href="/administrator/customers/edit_order/<?php echo $order['order_id'] ?>"><?php echo $order['order_id'] ?></a></td>
                 <td><?php echo $order['login'] ?></td>
                 <td><?php echo $order['name'] ?></td>

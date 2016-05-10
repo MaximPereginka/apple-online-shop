@@ -1,24 +1,30 @@
 <section class="users-edit">
     <div class="container">
-        <h1>Личный кабинет</h1>
-        <h2>Главная информация</h2>
-        <form action="" method="post">
-            <input type="hidden" value="1" name="save_main_information">
-            <p><b>ID: </b><?php echo $data['user']['user_id'] ?><input name="user_id" value="<?php echo $data['user']['user_id'] ?>" type="hidden"></p>
-            <p><b>Логин: </b><input type="text" name="login" value="<?php echo $data['user']['login'] ?>"></p>
-            <p><b>Тип пользователя: </b> <?php echo $data['user']['name'] ?></p>
-            <p><b>Email: </b><input type="email" name="email" value="<?php echo $data['user']['email'] ?>"></p>
-            <p><b>Номер телефона: </b><input type="text" name="phone" value="<?php echo $data['user']['phone'] ?>"></p>
-            <p><input type="submit" value="Сохранить изменения"></p>
-        </form>
-        <h2>Изменение пароля</h2>
-        <form action="" method="post">
-            <input type="hidden" value="1" name="change_password">
-            <input name="user_id" value="<?php echo $data['user']['user_id'] ?>" type="hidden">
-            <p><b>Введите текущий пароль: </b><input type="password" name="current_password"></p>
-            <p><b>Введите новый пароль: </b><input type="password" name="new_password"></p>
-            <p><b>Повторно введите новый пароль: </b><input type="password" name="new_password_repeated"></p>
-            <p><b></b><input type="submit" value="Изменить пароль"></p>
-        </form>
+        <div class="page-headline">
+            <h2>Личный кабинет</h2>
+        </div>
+        <div class="form-block">
+            <h3>Главная информация</h3>
+            <form action="" method="post">
+                <input type="hidden" value="1" name="save_main_information">
+                <p><b>ID: </b><?php echo $data['user']['user_id'] ?><input name="user_id" value="<?php echo $data['user']['user_id'] ?>" type="hidden"></p>
+                <p><b>Логин: </b><input type="text" name="login" value="<?php echo $data['user']['login'] ?>"></p>
+                <p><b>Тип пользователя: </b> <?php echo $data['user']['name'] ?></p>
+                <p><b>Email: </b><input type="email" name="email" value="<?php echo $data['user']['email'] ?>"></p>
+                <p><b>Номер телефона: </b><input type="text" name="phone" value="<?php echo $data['user']['phone'] ?>"></p>
+                <p><input class="button orange-button" type="submit" value="Сохранить изменения"></p>
+            </form>
+        </div>
+        <div class="form-block">
+            <h3>Изменение пароля</h3>
+            <form action="" method="post">
+                <input type="hidden" value="1" name="change_password">
+                <input name="user_id" value="<?php echo $data['user']['user_id'] ?>" type="hidden">
+                <p><b>Введите текущий пароль: </b><input type="password" name="current_password" placeholder="Текущий пароль"></p>
+                <p><b>Введите новый пароль: </b><input type="password" name="new_password" placeholder="Новый пароль"></p>
+                <p><b>Повторно введите новый пароль: </b><input type="password" name="new_password_repeated" placeholder="Новый пароль ещё раз"></p>
+                <p><b></b><input class="button orange-button" type="submit" value="Изменить пароль"></p>
+            </form>
+        </div>
     </div>
 </section>

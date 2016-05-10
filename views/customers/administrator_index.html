@@ -1,13 +1,16 @@
 <section class="row">
     <div class="container">
-        <h1>Список клиентов</h1>
-        <table rules="none">
-            <tr>
+        <div class="page-headline">
+            <h2>Список клиентов</h2>
+        </div>
+        <table class="striped-table" rules="none">
+            <tr class="top-row">
                 <th>ID Клиента</th>
                 <th>Имя</th>
                 <th>Фамилия</th>
                 <th>Email</th>
                 <th>Номер телефона</th>
+                <th>&nbsp;</th>
             </tr>
 
             <?php
@@ -24,10 +27,12 @@
                 <td><?php echo $customer['client_id'] ?></td>
                 <td><?php echo $customer['name'] ?></td>
                 <td><?php echo $customer['surname'] ?></td>
-                <td><?php echo $customer['email'] ?> грн.</td>
+                <td><?php echo $customer['email'] ?></td>
                 <td><?php echo $customer['phone'] ?></td>
-                <td><a href="/administrator/customers/view/<?php echo $customer['client_id'] ?>">Подробнее</a></td>
-                <td><a onclick="return confirmDeleteCustomer()" href="/administrator/customers/index/delete/<?php echo $customer['client_id'] ?>" class="delete-button">Удалить</a></td>
+                <td class="right-align">
+                    <a class="button orange-button" href="/administrator/customers/view/<?php echo $customer['client_id'] ?>">Подробнее</a>
+                    <a class="button transparent-button" onclick="return confirmDeleteCustomer()" href="/administrator/customers/index/delete/<?php echo $customer['client_id'] ?>" class="delete-button">Удалить</a>
+                </td>
 
             </tr>
 
@@ -37,10 +42,11 @@
             ?>
 
         </table>
-
         <!-- ============= NAVIGATION ================ -->
-        <nav class="pages">
+        <div class="page-headline">
             <h2>Страницы</h2>
+        </div>
+        <nav class="pages-navigation">
             <ul>
 
                 <?php

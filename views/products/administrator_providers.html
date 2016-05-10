@@ -1,20 +1,23 @@
 <section class="row">
     <div class="container">
-        <h1>Поставщики</h1>
-        <div class="add_provider">
+        <div class="page-headline">
+            <h2>Поставщики</h2>
+        </div>
+        <div class="form-block inline-form">
             <form action="" method="post">
-                <input name="provider_name" placeholder="Название поставщика" type="text" required>
-                <input name="email" placeholder="Email" type="email">
-                <input name="phone" placeholder="Номер телефона" type="text">
-                <input type="submit" value="Добавить">
+                <input class="inputs" name="provider_name" placeholder="Название поставщика" type="text" required>
+                <input class="inputs" name="email" placeholder="Email" type="email">
+                <input class="inputs" name="phone" placeholder="Номер телефона" type="text">
+                <input class="button orange-button" type="submit" value="Добавить">
             </form>
         </div>
-        <table rules="none">
-            <tr>
+        <table class="striped-table" rules="none">
+            <tr class="top-row">
                 <th>ID</th>
                 <th>Название</th>
                 <th>Email</th>
                 <th>Номер телефона</th>
+                <th>&nbsp;</th>
             </tr>
 
             <?php
@@ -34,7 +37,7 @@
                 <td><?php echo $providers['name'] ?></td>
                 <td><?php echo $providers['email'] ?></td>
                 <td><?php echo $providers['phone'] ?></td>
-                <td><a onclick="return confirmDeleteProvider()" href="/administrator/products/providers/delete/<?php echo $providers['provider_id'] ?>" class="delete-button">Удалить</a></td>
+                <td class="right-align"><a class="button transparent-button" onclick="return confirmDeleteProvider()" href="/administrator/products/providers/delete/<?php echo $providers['provider_id'] ?>" class="delete-button">Удалить</a></td>
             </tr>
 
             <?php

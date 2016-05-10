@@ -1,24 +1,44 @@
-<h3 xmlns="http://www.w3.org/1999/html">Последние сообщения от посетителей:</h3>
-<table rules="none">
+<section class="row">
+    <div class="container">
+        <div class="page-headline">
+            <h2>Последние сообщения от посетителей:</h2>
+            <table class="striped-table" rules="none">
+                <tr class="top-row">
+                    <th>ID</th>
+                    <th>Имя</th>
+                    <th>Email</th>
+                    <th>Текст сообщения</th>
+                    <th>&nbsp;</th>
+                </tr>
 
-<?php
+                <?php
 
     if($data['callback'] == "") echo "<p>Список сообщений пуст</p>";
-    else {
+                else {
 
-    foreach($data['callback'] as $message) { ?>
+                $k = 0;
 
-<tr>
-    <td><?php echo $message['message_id'] ?></td>
-    <td><?php echo $message['client_name'] ?></td>
-    <td>Email: <?php echo $message['email'] ?></td>
-    <td><?php echo $message['message'] ?></td>
-    <td><a onclick="return confirmDeleteMessage()" class="delete" href="/administrator/callback/delete/<?php echo $message['message_id'] ?>">Удалить</a></td>
-</tr>
+                foreach($data['callback'] as $message) {
+
+                    $class = $k % 2;
+                    $k++;
+
+                ?>
+
+                <tr class="row-<?= $class ?>">
+                    <td><?php echo $message['message_id'] ?></td>
+                    <td><?php echo $message['client_name'] ?></td>
+                    <td><?php echo $message['email'] ?></td>
+                    <td><?php echo $message['message'] ?></td>
+                    <td><a class="button orange-button" onclick="return confirmDeleteMessage()" class="delete" href="/administrator/callback/delete/<?php echo $message['message_id'] ?>">Удалить</a></td>
+                </tr>
 
 
-<?php
+                <?php
  }
 }
 ?>
-</table>
+            </table>
+        </div>
+    </div>
+</section>

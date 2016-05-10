@@ -102,11 +102,11 @@ header.administrator {
 
 /*--------------------MESSAGE------------------------*/
 section.administrator-message {
-  background: $veryBrightGrey;
+  background: #1E90FF;
 
   .container {
     p {
-      color: $darkGrey;
+      color: $white;
       text-align: center;
       font-weight: bold;
     }
@@ -261,13 +261,6 @@ section.administrator-products-list {
   }
 }
 
-/*----------------- Products's editing -------------------*/
-section.administrator-product-edit {
-  .container {
-
-  }
-}
-
 /*---------------- Empty line -----------------------*/
 div.empty {
   display: block;
@@ -281,6 +274,7 @@ footer.administrator {
   font-family: "Segoe UI";
   position: fixed;
   bottom: 0;
+  opacity: 0.95;
 
   .container {
     p {
@@ -442,3 +436,159 @@ footer.administrator {
     }
   }
 }
+
+/*-------------------- Mutual styles -------------------------*/
+/*-------------------- Buttons --------------------------------*/
+.button {
+  border: 1px solid $darkOrange;
+  padding: 8px 16px;
+  text-decoration: none;
+  outline: none;
+  font-size: 90%;
+  transition: 0.25s ease all;
+  text-transform: uppercase;
+
+  &:hover {
+    border: 1px solid $green;
+    background: $green;
+    color: $white;
+  }
+}
+
+.transparent-button {
+  color: $darkOrange;
+  background: none;
+}
+
+.orange-button {
+  color: $white;
+  background-color: $darkOrange;
+}
+
+/*------------------------ Form block --------------------------------*/
+.form-block {
+  background: #eee;
+  margin: 0 20px 20px;
+  padding: 10px;
+
+  h3 {
+    margin: 0 0 20px;
+    color: #333;
+  }
+
+  .inputs {
+    height: 35px;
+    padding: 2px 4px;
+    font-size: 90%;
+    font-color: #444;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/*----------------------- Page headline ----------------------------*/
+.page-headline {
+  h1,h2,h3 {
+    text-align: center;
+    color: #333333;
+  }
+}
+
+/*------------------------ Striped table ------------------------------------------*/
+table.striped-table {
+  margin: 20px;
+  width: calc(100% - 40px);
+
+  tr {
+    height: 44px;
+
+    td, th {
+      padding: 0px 10px;
+    }
+
+    td.right-align {
+      text-align: right;
+    }
+
+    td {
+      color: #444;
+      padding-top: 4px;
+      padding-bottom: 4px;
+    }
+
+    td.nesting-1 {
+      padding-left: 40px;
+    }
+    td.nesting-2 {
+      padding-left: 80px;
+    }
+    td.nesting-3 {
+      padding-left: 160px;
+    }
+    td.nesting-4 {
+      padding-left: 320px;
+    }
+    td.nesting-5 {
+      padding-left: 640px;
+    }
+  }
+
+  tr.row-0 {
+    background: #fafafa;
+  }
+
+  tr.row-1 {
+    background: #eee;
+  }
+
+  tr.top-row {
+    color: $white;
+    background: #444;
+
+    th {
+      text-align: left;
+    }
+  }
+
+  tr.new {
+    background:	#B3EE3A;
+    border-bottom: 1px dotted #444;
+  }
+
+  tr.total {
+    background:	#FFA500;
+
+    td {
+      color: $white;
+      font-weight: bold;
+    }
+  }
+}
+
+/*---------------------- Top navigation ---------------------------*/
+.button-bar {
+  padding: 20px 0;
+  text-align: center;
+  background: #fafafa;
+}
+
+/*------------------------- Pages navigation -------------------------*/
+nav.pages-navigation {
+  ul {
+    text-align: center;
+    padding: 0;
+    li {
+      display: inline-block;
+      list-style: none;
+      padding: 5px;
+      margin: 0px;
+
+      a {
+        color: #444;
+      }
+    }
+  }
+}
+
