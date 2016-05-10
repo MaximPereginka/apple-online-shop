@@ -19,6 +19,8 @@
 
                     if($users['login'] == $_SESSION['login']) continue;
 
+                    if($users['user_id'] == 0) continue;
+
                     $class = $k % 2;
                     $k++;
 
