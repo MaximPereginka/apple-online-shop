@@ -294,9 +294,12 @@ footer.administrator {
     height: 35px;
     padding: 2px 4px;
     font-size: 90%;
-    font-color: #444; }
+    font-color: #444;
+    display: inline-block; }
   .form-block p:last-child {
     margin-bottom: 0; }
+  .form-block textarea {
+    height: 150px; }
 
 /*----------------------- Page headline ----------------------------*/
 .page-headline h1, .page-headline h2, .page-headline h3 {

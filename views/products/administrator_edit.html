@@ -18,11 +18,11 @@
                         <img src="<?php echo $data['product']['image'] ?>" alt="<?php echo $data['product']['caption'] ?>" />
                         <div class="details">
                             <p><b>ID: </b><?php echo $data['product']['product_id'] ?><input type="hidden" name="product_id" value="<?php echo $data['product']['product_id'] ?>"></p>
-                            <p><b>Название: </b><input type="text" name="caption" value="<?php echo $data['product']['caption'] ?>" required></p>
-                            <p><b>URL Картинки: </b><input type="text" name="image" value="<?php echo $data['product']['image'] ?>" required></p>
-                            <p><b>Цена: </b><input type="text" name="price" value="<?php echo $data['product']['price'] ?>"></p>
+                            <p><b>Название: </b><input class="inputs" type="text" name="caption" value="<?php echo $data['product']['caption'] ?>" placeholder="Введите название товара" required></p>
+                            <p><b>URL Картинки: </b><input class="inputs" type="text" name="image" value="<?php echo $data['product']['image'] ?>" placeholder="Введите URL изображения" required></p>
+                            <p><b>Цена: </b><input class="inputs" type="text" name="price" value="<?php echo $data['product']['price'] ?>" placeholder="Введите цену" required></p>
                             <p><b>Поставщик: </b>
-                                <select name="provider_id">
+                                <select class="inputs" name="provider_id">
 
                                     <?php
                                         foreach($data['providers'] as $provider) {

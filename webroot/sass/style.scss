@@ -481,10 +481,15 @@ footer.administrator {
     padding: 2px 4px;
     font-size: 90%;
     font-color: #444;
+    display: inline-block;
   }
 
   p:last-child {
     margin-bottom: 0;
+  }
+
+  textarea {
+    height: 150px;
   }
 }
 
