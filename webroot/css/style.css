@@ -295,7 +295,8 @@ footer.administrator {
     padding: 2px 4px;
     font-size: 90%;
     font-color: #444;
-    display: inline-block; }
+    display: inline-block;
+    -webkit-appearance: menulist-button; }
   .form-block p:last-child {
     margin-bottom: 0; }
   .form-block textarea {
