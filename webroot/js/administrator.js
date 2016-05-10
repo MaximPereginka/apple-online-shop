@@ -71,3 +71,13 @@ function confirmDeleteOrder() {
         return false;
     }
 }
+
+//Предупреждает об удалении клиента
+function confirmDeleteCustomer() {
+    if(confirm("Вы действительно хотите удалить этого клиента?")) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}

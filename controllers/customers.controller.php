@@ -24,7 +24,7 @@ Class CustomersController extends Controller
                 $result = $this->model->delete_order($this->params[1]);
 
                 if($result) {
-                    Session::setMessage("Щаказ успешно удалён");
+                    Session::setMessage("Заказ успешно удалён");
                     Router::redirect("/administrator/customers/orders");
                 }
                 else {
@@ -96,11 +96,59 @@ Class CustomersController extends Controller
     
     //Выводит многостраничный список клиентов
     public function administrator_index(){
+        //Удаление клиента
+        if(isset($this->params[0]) && ($this->params[0] == 'delete')){
+            if(isset($this->params[1])) {
+                $result = $this->model->delete_client($this->params[1]);
+
+                if($result) {
+                    Session::setMessage("Клиент успешно удалён");
+                    Router::redirect("/administrator/customers");
+                }
+                else {
+                    Session::setMessage("Ошибка удаления клиента");
+                }
+            }
+        }
         
+        $customers_count = $this->model->count_clients();
+        if($customers_count){
+            //Получаем количество клиентов
+            $customers_count = $customers_count[0]['clients_count'];
+
+            //Рассчитываем количество страниц, необходимых для отображения заказов
+            $this->data['pages_required'] = ceil($customers_count / 20);
+
+            //Текущая страница по-умолчанию
+            $current_page = 1;
+
+            //Получаем номер текущей страницы
+            if(isset($this->params[0]) && ($this->params[0] == 'page')){
+                if(isset($this->params[1]) && ($this->params[1] <= $this->data['pages_required'] )) {
+                    $current_page = $this->params[1];
+                }
+                else {
+                    Session::setMessage("Такой страницы не существует");
+                    Router::redirect("/administrator/customers/index");
+                }
+            }
+
+            //Получаем клиентов для данной страницы
+            $this->data['customers'] = $this->model->get_clients_page($current_page);
+        }
+        else {
+            Session::setMessage("Не удалось посчитать количество пользователей");
+        }
     }
     
     //Выводит подробную информацию о клиенте и список его заказов
-    public function edit(){
-
+    public function administrator_view(){
+        if(isset($this->params[0])){
+            $this->data['client'] = $this->model->get_client($this->params[0]);
+            $this->data['orders'] = $this->model->get_client_orders($this->params[0]);
+        } 
+        else {
+            Router::redirect("/administrator/customers");
+        }
     }
 }

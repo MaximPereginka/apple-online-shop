@@ -8,11 +8,72 @@
 
 Class Customers extends Model
 {
-    //Возвращает список клиентов и информацию о них
+    //Возвращает 20 клиентов для страницы n
+    public function get_clients_page($page){
+        $page = (int)$page;
+        $offset = 20 * ($page - 1);
+
+        $sql = "
+            SELECT *
+            FROM clients
+            LIMIT ".$offset.",20
+        ";
+
+        return $this->db->query($sql);
+    }
 
     //Возвращает все заказы клиента по id клиента
+    public function get_client_orders($id){
+        $id = (int)$id;
+
+        $sql = "
+            SELECT orders.order_id, users.login, 
+                order_status.name, SUM(products.price * order_content.quantity) as order_price
+            FROM orders, order_status, users, clients, products, order_content
+            WHERE (orders.status_id = order_status.status_id) 
+                AND (users.user_id = orders.user_id)
+                    AND (clients.client_id = orders.client_id)
+                        AND (orders.order_id = order_content.order_id)
+                            AND (order_content.product_id = products.product_id)
+                              AND (clients.client_id = ".$id.")
+            GROUP BY(orders.order_id)  
+        ";
+
+        return $this->db->query($sql);
+    }
 
     //Возвращает информацию о клиенте по его id
+    public function get_client($id){
+        $id = (int)$id;
+
+        $sql = "
+            SELECT *
+            FROM clients
+            WHERE clients.client_id = ".$id."
+        ";
+
+        return $this->db->query($sql);
+    }
+
+    //Удаляет клиента по его id
+    public function delete_client($id){
+        $id = (int)$id;
+
+        $sql = "
+            DELETE
+            FROM clients
+            WHERE client_id = ".$id."
+        ";
+
+        return $this->db->query($sql);
+    }
+
+    //Возвращает количество клиентов
+    public function count_clients(){
+        $sql = "SELECT COUNT(client_id) AS clients_count FROM clients";
+        
+        return $this->db->query($sql);
+    }
 
     //Принимает номер страницы
     //Возвращает 20 заказов для этой страницы
@@ -35,10 +96,6 @@ Class Customers extends Model
 
         return $this->db->query($sql);
     }
-
-    //Создаёт новый заказ
-
-    //Создаёт нового клиента
 
     //Возвращает количество заказов
     public function count_orders(){

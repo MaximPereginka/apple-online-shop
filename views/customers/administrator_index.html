@@ -1,0 +1,63 @@
+<section class="row">
+    <div class="container">
+        <h1>Список клиентов</h1>
+        <table rules="none">
+            <tr>
+                <th>ID Клиента</th>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Email</th>
+                <th>Номер телефона</th>
+            </tr>
+
+            <?php
+                $k = 0;
+
+                foreach($data['customers'] as $customer) {
+
+                    $class = $k % 2;
+                    $k++;
+
+                    ?>
+
+            <tr class="row-<?php echo $class ?>">
+                <td><?php echo $customer['client_id'] ?></td>
+                <td><?php echo $customer['name'] ?></td>
+                <td><?php echo $customer['surname'] ?></td>
+                <td><?php echo $customer['email'] ?> грн.</td>
+                <td><?php echo $customer['phone'] ?></td>
+                <td><a href="/administrator/customers/view/<?php echo $customer['client_id'] ?>">Подробнее</a></td>
+                <td><a onclick="return confirmDeleteCustomer()" href="/administrator/customers/index/delete/<?php echo $customer['client_id'] ?>" class="delete-button">Удалить</a></td>
+
+            </tr>
+
+            <?php
+
+                }
+            ?>
+
+        </table>
+
+        <!-- ============= NAVIGATION ================ -->
+        <nav class="pages">
+            <h2>Страницы</h2>
+            <ul>
+
+                <?php
+
+                for($i = 1; $i <= $data['pages_required']; $i++) {
+
+                ?>
+
+                <li><a href="/administrator/customers/index/page/<?= $i ?>"><?= $i ?></a></li>
+
+                <?php
+
+                }
+
+                ?>
+
+            </ul>
+        </nav>
+    </div>
+</section>
