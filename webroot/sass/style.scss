@@ -493,6 +493,14 @@ footer.administrator {
   }
 }
 
+.login-form {
+  text-align: center;
+
+  .form-block {
+    display: inline-block;
+  }
+}
+
 /*----------------------- Page headline ----------------------------*/
 .page-headline {
   h1,h2,h3 {

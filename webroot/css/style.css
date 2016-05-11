@@ -301,6 +301,11 @@ footer.administrator {
   .form-block textarea {
     height: 150px; }
 
+.login-form {
+  text-align: center; }
+  .login-form .form-block {
+    display: inline-block; }
+
 /*----------------------- Page headline ----------------------------*/
 .page-headline h1, .page-headline h2, .page-headline h3 {
   text-align: center;
