@@ -22,6 +22,7 @@ class ProductsController extends Controller
     //Выводит список базовых категорий товаров
     public function index() {
         //Получаем данные с модели
+        $this->data['categories'] = $this->model->getCategoriesList();
         //Получаем список категорий
         //См. админку
     }

@@ -1,2 +1,46 @@
 <h2>Список категорий</h2>
+<ul>
+
+    <?php
+            $GLOBALS["row"] = 0;
+            $GLOBALS["data"] = $data['categories'];
+            $id = 0;
+
+            //Рекурсивно выводит древо категорий
+            //Принимает id категории и выводит все её подкатегории
+            function get_children($id, $nesting){
+
+                //Выводим все подкатегории даной категории
+                foreach($GLOBALS["data"] as $categories){
+
+                    if($id == $categories['parent_id']) {
+                        $class = $GLOBALS["row"] % 2;
+                        $GLOBALS["row"]++;
+
+                        ?>
+
+        <li class="nesting-<?= $nesting ?>"><?= $categories['name'] ?></li>
+
+    <?php
+
+                        //Проверяем, есть ли у даной категории подкатегории
+                        $has_children = false;
+                        foreach($GLOBALS["data"] as $cat) {
+                            if($cat['parent_id'] == $categories['category_id']) {
+                                $has_children = true;
+                                break;
+                            }
+                        }
+                        if($has_children) get_children($categories['category_id'], $nesting + 1);
+                    }
+                }
+            }
+
+            //Начальный уровень вложенности - нет родителя
+            $nesting = 0;
+            get_children(0, $nesting);
+            ?>
+
+</ul>
+
 
