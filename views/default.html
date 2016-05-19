@@ -22,6 +22,8 @@
     <!-- Стили сайта -->
     <link href="/css/style.css" rel="stylesheet" type="text/css">
 
+    <!-- Google Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -54,6 +56,7 @@
                         </ul>
                     </li>
                     <li class="<?php if(App::getRouter()->getController() == "callback") echo "active" ?>"><a href="/callback">Обратная связь</a></li>
+                    <li class="<?php if(App::getRouter()->getController() == "customers") echo "active" ?>"><a style="padding: 14px 15px 7px !important" href="/customers/cart"><i class="material-icons">add_shopping_cart</i></a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
@@ -66,9 +69,9 @@
 
     <?php if(Session::hasMessage()) { ?>
 
-    <div class="alert alert-info" role="alert">
-        <p><?php Session::message() ?></p>
-    </div>
+            <div class="alert alert-info" role="alert">
+                <p><?php Session::message() ?></p>
+            </div>
 
     <?php } ?>
 
@@ -78,10 +81,46 @@
             <?php echo $data['content']?>
 
 
-    <!-- =========== FOOTER ============== -->
+
 
         </div>
     </div><!-- /.container -->
+
+    <!-- =========== EMPTY =============== -->
+    <div class="main-empty">&nbsp;</div>
+
+    <!-- =========== FOOTER ============== -->
+    <footer class="row main-footer">
+        <div class="container">
+            <div class="col-md-4">
+                <div class="col-md-3">
+                    <a href="/main">
+                        <img style="height: 60px;" src="http://www.logospike.com/wp-content/uploads/2015/12/Apple_Logo_Png_09.png" alt="Логотип"/>
+                    </a>
+                </div>
+                <div class="col-md-9">
+                    <p>Интернет-магазин Яблочник<br/>2015-1016<br/>All right reserved</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <p><b>График работы</b></p>
+                <p>Понедельник - Пятница 10:00 - 18:00</p>
+                <p>Суббота, Воскресенье: Выходной</p>
+            </div>
+            <div class="col-md-4">
+                <div class="col-md-10">
+                    <p><b>Контакты</b></p>
+                    <p>Телефон: 555-33-55</p>
+                    <p>Email: info@fake.com</p>
+                </div>
+                <div class="col-md-2">
+                    <p style="margin-bottom: 6px;"><a href="#" target="_blank"><img height="36px" src="http://fs172.www.ex.ua/show/75216048/75216048.png?1600" /></a></p>
+                    <p style="margin-bottom: 6px;"><a href="#" target="_blank"><img height="36px" src="http://findicons.com/files/icons/818/aquaticus_social/64/facebook.png"/></a></p>
+                    <p style="margin-bottom: 6px;"><a href="#" target="_blank"><img height="36px" src="http://findicons.com/files/icons/2409/dt_twitter_and_rss_icon/64/twitter_icon_simple.png" /></a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -90,7 +129,6 @@
     <script src="../../dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

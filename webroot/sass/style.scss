@@ -9,6 +9,10 @@ $iPadRotated: 1020px;
   src: url(../fonts/RonduitCapitals-Light.otf); /* ÐŸÑƒÑ‚ÑŒ Ðº Ñ„Ð°Ð¹Ð»Ñƒ ÑÐ¾ ÑˆÑ€Ð¸Ñ„Ñ‚Ð¾Ð¼ */
 }
 
+.main-empty {
+  height: 200px;
+}
+
 /* domain/callback page */
 .callback-form {
   max-width: 500px;
@@ -16,6 +20,17 @@ $iPadRotated: 1020px;
   textarea {
     height: 100px;
   }
+}
+
+/* domain/main page */
+footer.main-footer {
+  margin: 20px 0 0;
+  padding: 20px 0;
+  background: #eee;
+  height: 150px;
+  position: fixed;
+  bottom: 0;
+  z-index: 16;
 }
 
 /*======================= CONTROL PANEL STYLES =======================*/
