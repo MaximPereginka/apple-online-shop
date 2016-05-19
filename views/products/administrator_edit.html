@@ -10,7 +10,7 @@
         </div>
 
         <!-- ============== Главная информация о товаре ================= -->
-        <div class="form-block">
+        <div class="form-block  details-block">
             <form action="" method="post">
                 <div class="info">
                     <h3>О товаре</h3>
@@ -18,10 +18,14 @@
                         <img src="<?php echo $data['product']['image'] ?>" alt="<?php echo $data['product']['caption'] ?>" />
                         <div class="details">
                             <p><b>ID: </b><?php echo $data['product']['product_id'] ?><input type="hidden" name="product_id" value="<?php echo $data['product']['product_id'] ?>"></p>
-                            <p><b>Название: </b><input class="inputs" type="text" name="caption" value="<?php echo $data['product']['caption'] ?>" placeholder="Введите название товара" required></p>
-                            <p><b>URL Картинки: </b><input class="inputs" type="text" name="image" value="<?php echo $data['product']['image'] ?>" placeholder="Введите URL изображения" required></p>
-                            <p><b>Цена: </b><input class="inputs" type="text" name="price" value="<?php echo $data['product']['price'] ?>" placeholder="Введите цену" required></p>
-                            <p><b>Поставщик: </b>
+                            <p><b>Название: </b></p>
+                            <p><input class="inputs" type="text" name="caption" value="<?php echo $data['product']['caption'] ?>" placeholder="Введите название товара" required></p>
+                            <p><b>URL Картинки: </b></p>
+                            <p><input class="inputs" type="text" name="image" value="<?php echo $data['product']['image'] ?>" placeholder="Введите URL изображения" required></p>
+                            <p><b>Цена: </b></p>
+                            <p><input class="inputs" type="text" name="price" value="<?php echo $data['product']['price'] ?>" placeholder="Введите цену" required></p>
+                            <p><b>Поставщик: </b></p>
+                            <p>
                                 <select class="inputs" name="provider_id">
 
                                     <?php
@@ -44,7 +48,7 @@
 
                     <div class="block">
                         <h4>Краткое описание товара</h4>
-                        <textarea name="short_description"><?php echo $data['product']['short_description'] ?></textarea>
+                        <textarea class="short" name="short_description"><?php echo $data['product']['short_description'] ?></textarea>
                     </div>
 
                     <div class="block">
@@ -63,29 +67,31 @@
         <div class="page-headline">
             <h3>Категории товара</h3>
         </div>
-        <table class="striped-table" rules="none">
-            <tr class="top-row">
-                <th>Название категории</th>
-                <th>&nbsp;</th>
-            </tr>
+        <div class="striped-table">
+            <table rules="none">
+                <tr class="top-row">
+                    <th>Название категории</th>
+                    <th>&nbsp;</th>
+                </tr>
 
-            <?php
+                <?php
             for($i = count($data['product_categories']), $k = 0; $k < $i; $k++){
                 $class = $k % 2;
                 $class = "row-".$class;
 
                 echo '
                     <tr class="'.$class.'">
-            <td>'.$data['product_categories'][$k]['name'].'</td>
-            <td class="right-align"><a class="button transparent-button" href="/administrator/products/edit/'.$data['product']['product_id'].'/deleteCategory/'.$data['product_categories'][$k]['category_id'].'">Удалить</a></td>
-            </tr>
-            ';
-            }
-            ?>
-        </table>
+                <td>'.$data['product_categories'][$k]['name'].'</td>
+                <td class="right-align"><a class="button transparent-button" href="/administrator/products/edit/'.$data['product']['product_id'].'/deleteCategory/'.$data['product_categories'][$k]['category_id'].'">Удалить</a></td>
+                </tr>
+                ';
+                }
+                ?>
+            </table>
+        </div>
         <div class="form-block">
             <form action="" method="post">
-                <select class="inputs" name="add_to_category">
+                <select class="inputs cols-2" name="add_to_category">
                     <option>Выберите категорию</option>
 
                     <?php
@@ -97,7 +103,7 @@
                     ?>
 
                 </select>
-                <input class="button orange-button" href="/administrator/products/view" type="submit" value="Добавить категорию">
+                <input class="button orange-button cols-2" href="/administrator/products/view" type="submit" value="Добавить категорию">
             </form>
         </div>
 
@@ -105,14 +111,15 @@
         <div class="page-headline">
             <h3>Подробные характеристики</h3>
         </div>
-        <table class="striped-table" rules="none">
-            <tr class="top-row">
-                <th>Характеристика</th>
-                <th>Значение</th>
-                <th>&nbsp;</th>
-            </tr>
+        <div class="striped-table">
+            <table rules="none">
+                <tr class="top-row">
+                    <th>Характеристика</th>
+                    <th>Значение</th>
+                    <th>&nbsp;</th>
+                </tr>
 
-            <?php
+                <?php
 
             for($i = count($data['product_features']), $k = 0; $k < $i; $k++){
                 $class = $k % 2;
@@ -120,19 +127,20 @@
 
                 echo '
                     <tr class="'.$class.'">
-            <td>'.$data['product_features'][$k]['name'].'</td>
-            <td>'.$data['product_features'][$k]['value'].'</td>
-            <td class="right-align"><a class="button transparent-button" href="/administrator/products/edit/'.$data['product']['product_id'].'/deleteFeature/'.$data['product_features'][$k]['feature_id'].'">Удалить</a></td>
-            </tr>
-            ';
-            }
+                <td>'.$data['product_features'][$k]['name'].'</td>
+                <td>'.$data['product_features'][$k]['value'].'</td>
+                <td class="right-align"><a class="button transparent-button" href="/administrator/products/edit/'.$data['product']['product_id'].'/deleteFeature/'.$data['product_features'][$k]['feature_id'].'">Удалить</a></td>
+                </tr>
+                ';
+                }
 
-            ?>
+                ?>
 
-        </table>
+            </table>
+        </div>
         <div class="form-block">
             <form action="" method="post">
-                <select class="inputs" name="add_product_feature" required>
+                <select class="inputs cols-3" name="add_product_feature" required>
                     <option value="">Выберите характеристику</option>
 
                     <?php
@@ -144,8 +152,8 @@
                     ?>
 
                 </select>
-                <input class="inputs" type="text" name="new_feature_value" placeholder="Введите значение" required>
-                <input class="button orange-button" type="submit" value="Добавить/перезаписать характеристику">
+                <input class="inputs cols-3" type="text" name="new_feature_value" placeholder="Введите значение" required>
+                <input class="button orange-button cols-3" type="submit" value="Добавить/перезаписать">
             </form>
         </div>
     </div>

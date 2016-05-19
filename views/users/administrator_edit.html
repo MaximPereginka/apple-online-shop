@@ -7,12 +7,15 @@
             <h2>Редактирование пользователя</h2>
             <h3>Главная информация</h3>
         </div>
-        <div class="form-block">
+        <div class="form-block details-block">
             <form action="" method="post">
                 <input type="hidden" value="1" name="save_main_information">
                 <p><b>ID: </b><?php echo $data['user']['user_id'] ?><input class="inputs" name="user_id" value="<?php echo $data['user']['user_id'] ?>" type="hidden"></p>
-                <p><b>Логин: </b><input class="inputs" type="text" name="login" value="<?php echo $data['user']['login'] ?>" placeholder="Введите логин" required></p>
-                <p><b>Тип пользователя: </b><select class="inputs" name="user_type">
+                <p><b>Логин</b></p>
+                <p><input class="inputs" type="text" name="login" value="<?php echo $data['user']['login'] ?>" placeholder="Введите логин" required></p>
+                <p><b>Тип пользователя</b></p>
+                <p>
+                    <select class="inputs" name="user_type">
                     <?php
                     foreach($data['user_types'] as $user_types){
                         ?>
@@ -21,20 +24,24 @@
                     }
                 ?>
                 </select></p>
-                <p><b>Email: </b><input class="inputs" type="email" name="email" value="<?php echo $data['user']['email'] ?>"placeholder="Введите email" required></p>
-                <p><b>Номер телефона: </b><input class="inputs" type="text" name="phone" value="<?php echo $data['user']['phone'] ?>"placeholder="Введите номер телефона" required></p>
+                <p><b>Email</b></p>
+                <p><input class="inputs" type="email" name="email" value="<?php echo $data['user']['email'] ?>"placeholder="Введите email" required></p>
+                <p><b>Номер телефона</b></p>
+                <p><input class="inputs" type="text" name="phone" value="<?php echo $data['user']['phone'] ?>"placeholder="Введите номер телефона" required></p>
                 <p><input class="button orange-button" type="submit" value="Сохранить изменения"></p>
             </form>
         </div>
         <div class="page-headline">
             <h3>Изменение пароля</h3>
         </div>
-        <div class="form-block">
+        <div class="form-block details-block">
             <form action="" method="post">
                 <input type="hidden" value="1" name="change_password">
                 <input name="user_id" value="<?php echo $data['user']['user_id'] ?>" type="hidden">
-                <p><b>Введите новый пароль: </b><input class="inputs" type="password" name="new_password" placeholder="Введите новый пароль" required></p>
-                <p><b>Повторно введите новый пароль: </b><input class="inputs" type="password" name="new_password_repeated" placeholder="Повторно введите новый пароль" required></p>
+                <p><b>Введите новый пароль</b></p>
+                <p><input class="inputs" type="password" name="new_password" placeholder="Введите новый пароль" required></p>
+                <p><b>Повторно введите новый пароль</b></p>
+                <p><input class="inputs" type="password" name="new_password_repeated" placeholder="Повторно введите новый пароль" required></p>
                 <p><b></b><input class="button orange-button" type="submit" value="Изменить пароль"></p>
             </form>
         </div>

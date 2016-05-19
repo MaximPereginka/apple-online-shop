@@ -5,22 +5,23 @@
         </div>
         <div class="form-block inline-form">
             <form action="" method="post">
-                <input class="inputs" name="provider_name" placeholder="Название поставщика" type="text" required>
-                <input class="inputs" name="email" placeholder="Email" type="email">
-                <input class="inputs" name="phone" placeholder="Номер телефона" type="text">
-                <input class="button orange-button" type="submit" value="Добавить">
+                <input class="inputs cols-4" name="provider_name" placeholder="Название поставщика" type="text" required>
+                <input class="inputs cols-4" name="email" placeholder="Email" type="email">
+                <input class="inputs cols-4" name="phone" placeholder="Номер телефона" type="text">
+                <input class="button orange-button cols-4" type="submit" value="Добавить">
             </form>
         </div>
-        <table class="striped-table" rules="none">
-            <tr class="top-row">
-                <th>ID</th>
-                <th>Название</th>
-                <th>Email</th>
-                <th>Номер телефона</th>
-                <th>&nbsp;</th>
-            </tr>
+        <div class="striped-table">
+            <table rules="none">
+                <tr class="top-row">
+                    <th>ID</th>
+                    <th>Название</th>
+                    <th>Email</th>
+                    <th>Номер телефона</th>
+                    <th>&nbsp;</th>
+                </tr>
 
-            <?php
+                <?php
                 $k = 0;
 
                 foreach($data['providers'] as $providers) {
@@ -32,20 +33,21 @@
 
                     ?>
 
-            <tr class="row-<?php echo $class ?>">
-                <td><?php echo $providers['provider_id'] ?></td>
-                <td><?php echo $providers['name'] ?></td>
-                <td><?php echo $providers['email'] ?></td>
-                <td><?php echo $providers['phone'] ?></td>
-                <td class="right-align"><a class="button transparent-button" onclick="return confirmDeleteProvider()" href="/administrator/products/providers/delete/<?php echo $providers['provider_id'] ?>" class="delete-button">Удалить</a></td>
-            </tr>
+                <tr class="row-<?php echo $class ?>">
+                    <td><?php echo $providers['provider_id'] ?></td>
+                    <td><?php echo $providers['name'] ?></td>
+                    <td><?php echo $providers['email'] ?></td>
+                    <td><?php echo $providers['phone'] ?></td>
+                    <td class="right-align"><a class="button transparent-button" onclick="return confirmDeleteProvider()" href="/administrator/products/providers/delete/<?php echo $providers['provider_id'] ?>" class="delete-button">Удалить</a></td>
+                </tr>
 
-            <?php
+                <?php
 
                 }
             ?>
 
 
-        </table>
+            </table>
+        </div>
     </div>
 </section>

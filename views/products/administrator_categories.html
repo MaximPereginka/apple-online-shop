@@ -5,8 +5,9 @@
         </div>
         <div class="form-block">
             <form action="" method="post">
-                <input class="inputs" type="text" name="name" placeholder="Название категории" required>
-                <select class="inputs" name="parent_id">
+                <input class="inputs cols-4" type="text" name="name" placeholder="Название категории" required>
+                <input class="inputs cols-4" type="text" name="img" placeholder="URL Иконки" required>
+                <select class="inputs cols-4" name="parent_id">
                     <option value="0">Нет родителя</option>
 
                     <?php
@@ -24,22 +25,24 @@
                     ?>
 
                 </select>
-                <input class="button orange-button" type="submit" value="Создать">
+                <input class="button orange-button cols-4" type="submit" value="Создать">
             </form>
         </div>
 
-        <table class="striped-table" rules="none">
-            <tr class="top-row">
-                <th>ID Категории</th>
-                <th>Название</th>
-                <th>&nbsp;</th>
-            </tr>
+        <div class="striped-table">
+            <table rules="none">
+                <tr class="top-row">
+                    <th>ID Категории</th>
+                    <th>Изображение</th>
+                    <th>Название</th>
+                    <th>&nbsp;</th>
+                </tr>
 
-            <?php
+                <?php
             $GLOBALS["row"] = 0;
             $GLOBALS["data"] = $data['categories'];
             $id = 0;
-            
+
             //Рекурсивно выводит древо категорий
             //Принимает id категории и выводит все её подкатегории
             function get_children($id, $nesting){
@@ -53,15 +56,24 @@
 
                         ?>
 
-                            <tr class="row-<?= $class ?>">
-                                <td><?= $categories['category_id'] ?></td>
-                                <td class="nesting-<?= $nesting ?>"><?= $categories['name'] ?></td>
-                                <td class="right-align">
-                                    <a class="button transparent-button" href="/administrator/products/categories/delete/<?= $categories['category_id'] ?>" onclick="return confirmDeleteCategory()">Удалить</a>
-                                </td>
-                            </tr>
+                <tr class="row-<?= $class ?>">
+                    <td><?= $categories['category_id'] ?></td>
+                    <td class="nesting-<?= $nesting ?>">
 
-                        <?php
+                        <?php if($categories['img'] != "none") { ?>
+                        <img src="<?= $categories['img'] ?>" alt="Иконка категории <?= $categories['name'] ?>" />
+                        <?php }
+                                     else echo "Иконка отсутствует";
+                                     ?>
+
+                    </td>
+                    <td><?= $categories['name'] ?></td>
+                    <td class="right-align">
+                        <a class="button transparent-button" href="/administrator/products/categories/delete/<?= $categories['category_id'] ?>" onclick="return confirmDeleteCategory()">Удалить</a>
+                    </td>
+                </tr>
+
+                <?php
 
                         //Проверяем, есть ли у даной категории подкатегории
                         $has_children = false;
@@ -81,6 +93,8 @@
             get_children(0, $nesting);
             ?>
 
-        </table>
+            </table>
+        </div>
+
     </div>
 </section>

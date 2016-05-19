@@ -352,20 +352,22 @@ class Products extends Model
         else {
             $name = $this->db->escape($data['name']);
             $parent_id = '0';
+            $img = "none";
             if(isset($data['parent_id'])) $parent_id = $this->db->escape($data['parent_id']);
+            if(isset($data['img'])) $img = $this->db->escape($data['img']);
 
             if($data['parent_id'] == 0) {
                 $sql = "
                     INSERT INTO categories
-                    (`name`, `parent_id`,`has_parent`)
-                    VALUES ('".$name."','".$parent_id."','0')
+                    (`name`, `parent_id`,`has_parent`, `img`)
+                    VALUES ('".$name."','".$parent_id."','0', '".$img."')
                 ";
             }
             else {
                 $sql = "
                     INSERT INTO categories
-                    (`name`, `parent_id`, `has_parent`)
-                    VALUES ('".$name."','".$parent_id."','1')
+                    (`name`, `parent_id`, `has_parent`, `img`)
+                    VALUES ('".$name."','".$parent_id."','1', '".$img."')
                 ";
             }
 

@@ -8,7 +8,7 @@
             <h2>Информация о клиенте</h2>
             <h3>Личные данные</h3>
         </div>
-        <div class="form-block">
+        <div class="form-block details-block">
             <p><b>ID Клиента: </b><?= $data['client'][0]['client_id']?></p>
             <p><b>Имя: </b><?= $data['client'][0]['name']?></p>
             <p><b>Фамилия: </b><?= $data['client'][0]['surname']?></p>
@@ -19,15 +19,16 @@
         <div class="page-headline">
             <h3>Заказы</h3>
         </div>
-        <table class="striped-table" rules="none">
-            <tr class="top-row">
-                <th>ID Заказа</th>
-                <th>Менеджер</th>
-                <th>Статус</th>
-                <th>Всего</th>
-            </tr>
+        <div class="striped-table">
+            <table rules="none">
+                <tr class="top-row">
+                    <th>ID Заказа</th>
+                    <th>Менеджер</th>
+                    <th>Статус</th>
+                    <th>Всего</th>
+                </tr>
 
-            <?php
+                <?php
                 $k = 0;
 
                 foreach($data['orders'] as $order) {
@@ -39,19 +40,20 @@
 
                     ?>
 
-            <tr class="row-<?php echo $class . " " . $status ?>">
+                <tr class="row-<?php echo $class . " " . $status ?>">
                 <td><a target="_blank" href="/administrator/customers/edit_order/<?php echo $order['order_id'] ?>"><?php echo $order['order_id'] ?></a></td>
                 <td><?php echo $order['login'] ?></td>
                 <td><?php echo $order['name'] ?></td>
                 <td><?php echo $order['order_price'] ?> грн.</td>
 
-            </tr>
+                </tr>
 
-            <?php
+                <?php
 
                 }
             ?>
 
-        </table>
+            </table>
+        </div>
     </div>
 </section>

@@ -165,7 +165,7 @@ Class Customers extends Model
         $sql = "
             SELECT orders.order_id, clients.client_id, clients.name as client_name,
               clients.surname, users.login as user_name, users.user_id, order_status.status_id, order_status.name as status_name,
-                orders.date_created
+                orders.date_created, orders.delivery_type, orders.delivery_adress
             FROM orders, clients, users, order_status
             WHERE (orders.order_id = '".$id."') AND (orders.client_id = clients.client_id)
                 AND (users.user_id = orders.user_id) AND (order_status.status_id = orders.status_id)

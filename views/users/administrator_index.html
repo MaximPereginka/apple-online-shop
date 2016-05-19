@@ -6,17 +6,18 @@
         <div class="page-headline">
             <h2>Пользователи</h2>
         </div>
-        <table class="striped-table" rules="none">
-            <tr class="top-row">
-                <th>ID</th>
-                <th>Логин</th>
-                <th>Тип</th>
-                <th>Email</th>
-                <th>Номер телефона</th>
-                <th>&nbsp;</th>
-            </tr>
+        <div class="striped-table">
+            <table rules="none">
+                <tr class="top-row">
+                    <th>ID</th>
+                    <th>Логин</th>
+                    <th>Тип</th>
+                    <th>Email</th>
+                    <th>Номер телефона</th>
+                    <th>&nbsp;</th>
+                </tr>
 
-            <?php
+                <?php
                 $k = 0;
 
                 foreach($data['users'] as $users) {
@@ -30,24 +31,27 @@
 
                     ?>
 
-                    <tr class="row-<?php echo $class ?>">
-                        <td><?php echo $users['user_id'] ?></td>
-                        <td><?php echo $users['login'] ?></td>
-                        <td><?php echo $users['name'] ?></td>
-                        <td><?php echo $users['email'] ?></td>
-                        <td><?php echo $users['phone'] ?></td>
-                        <td class="right-align">
+                <tr class="row-<?php echo $class ?>">
+                    <td><?php echo $users['user_id'] ?></td>
+                    <td><?php echo $users['login'] ?></td>
+                    <td><?php echo $users['name'] ?></td>
+                    <td><?php echo $users['email'] ?></td>
+                    <td><?php echo $users['phone'] ?></td>
+                    <td class="right-align">
+                        <div class="btn-group">
                             <a class="button orange-button" href="/administrator/users/edit/<?php echo $users['user_id'] ?>">Редактировать</a>
                             <a class="button transparent-button" onclick="return confirmDeleteUsers()" href="/administrator/users/delete/<?php echo $users['user_id'] ?>">Удалить</a>
-                        </td>
-                    </tr>
+                        </div>
+                    </td>
+                </tr>
 
-                    <?php
+                <?php
 
                 }
             ?>
 
 
-        </table>
+            </table>
+        </div>
     </div>
 </section>

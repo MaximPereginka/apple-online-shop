@@ -8,13 +8,14 @@
             <h2>Просмотр заказа</h2>
         </div>
 
-        <div class="form-block">
+        <div class="form-block details-block">
             <form action="" method="post">
                 <input type="hidden" name="action" value="change-main-info">
                 <input type="hidden" name="order_id" value="<?= $data['order'][0]['order_id'] ?>">
                 <p><b>ID Заказа: </b><?= $data['order'][0]['order_id'] ?></p>
                 <p><b>Клиент: </b><a target="_blank" href="/administrator/customers/view/<?= $data['order'][0]['client_id'] ?>"><?= $data['order'][0]['client_name'] ?> <?= $data['order'][0]['surname'] ?></a></p>
-                <p><b>Менеджер: </b>
+                <p><b>Менеджер</b></p>
+                <p>
                     <select class="inputs" name="user_id" required>
                         <?php
 
@@ -32,7 +33,8 @@
 
                     </select>
                 </p>
-                <p><b>Статус: </b>
+                <p><b>Статус</b></p>
+                <p>
                     <select class="inputs" name="status_id" required>
 
                         <?php
@@ -51,20 +53,23 @@
 
                     </select>
                 </p>
+                <p><b>Способ доставки: </b><?= $data['order'][0]['delivery_type'] ?></p>
+                <p><b>Адрес доставки: </b><?= $data['order'][0]['delivery_adress'] ?></p>
                 <p><b>Дата создания: </b><?= $data['order'][0]['date_created'] ?></p>
                 <p><input class="button orange-button" type="submit" value="Сохранить"></p>
             </form>
         </div>
-        <table class="striped-table" rules="none">
-            <tr class="top-row">
-                <th>ID Товара</th>
-                <th>Название</th>
-                <th>Цена за единицу товара</th>
-                <th>Количество</th>
-                <th>Общая стоимость</th>
-            </tr>
+        <div class="striped-table">
+            <table rules="none">
+                <tr class="top-row">
+                    <th>ID Товара</th>
+                    <th>Название</th>
+                    <th>Цена за единицу товара</th>
+                    <th>Количество</th>
+                    <th>Общая стоимость</th>
+                </tr>
 
-            <?php
+                <?php
             $total_price = 0;
             $row = 0;
 
@@ -85,16 +90,17 @@
                     <td><?= $price ?> грн.</td>
                 </tr>
 
-            <?php
+                <?php
 
             }
 
             ?>
 
-            <tr class="total">
-                <td colspan="4">Всего:</td>
-                <td><?= $total_price ?> грн.</td>
-            </tr>
-        </table>
+                <tr class="total">
+                    <td colspan="4">Всего:</td>
+                    <td><?= $total_price ?> грн.</td>
+                </tr>
+            </table>
+        </div>
     </div>
 </section>
