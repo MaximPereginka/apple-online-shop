@@ -1,0 +1,88 @@
+<?php if(!App::$cart->isEmpty()) {
+
+?>
+
+<div class="page-header">
+    <h1>Ваш заказ</h1>
+    <h2>Корзина</h2>
+</div>
+<div class="row">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Название товара</th>
+            <th>Количество</th>
+            <th>Цена за единицу товара</th>
+            <th>Всего</th>
+            <th>&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <?php
+
+    $total = 0;
+
+    foreach($data['product_info'] as $item) {
+
+    $item_total = (int)$item['quantity'] * (int)$item['price'];
+    $total += $item_total;
+    ?>
+
+        <tr>
+            <td><a target="_blank" href="/products/view/<?= $item['product_id'] ?>"><?= $item['caption'] ?></a></td>
+            <td><?= $item['quantity'] ?> шт.</td>
+            <td><?= $item['price'] ?> грн.</td>
+            <td><?= $item_total ?> грн.</td>
+            <td><a style="max-width: 130px" href="/customers/cart/delete/<?= $item['product_id'] ?>" class="btn btn-danger btn-sm btn-block">Убрать</a></td>
+        </tr>
+
+        <?php
+
+    }
+
+    ?>
+
+        <td colspan="3"><b>Всего</b></td>
+        <td><b><?= $total ?> грн.</b></td>
+        <td><a style="max-width: 130px" href="/customers/cart/clear" class="btn btn-danger btn-sm btn-block">Очистить корзину</a></td>
+        </tbody>
+    </table>
+</div>
+<div class="page-header">
+    <h2>Оформление заказа</h2>
+</div>
+
+<div class="row">
+    <form class="callback-form" style="max-width: 400px" action="" method="post">
+        <input id="name" name="name" class="form-control" type="text" placeholder="Ваше имя" required>
+        <br/>
+        <input id="surname" name="surname" class="form-control" type="text" placeholder="Ваща фамилия" required>
+        <br/>
+        <input id="email" name="email" class="form-control" type="email" placeholder="Ваш email" required>
+        <br/>
+        <input id="phone" name="phone" class="form-control" type="text" placeholder="Ваш номер телефона" required>
+        <br/>
+        <input id="address" name="address" class="form-control" type="text" placeholder="Адресс доставки" required>
+        <br/>
+        <select id="delivery_type" name="delivery_type" class="form-control" required>
+            <option value="">Выберите тип доставки</option>
+            <option>Доставка курьером</option>
+            <option>Самовывоз</option>
+        </select>
+        <br/>
+        <input class="btn btn-info btn-block" type="submit" value="Оформить заказ">
+    </form>
+</div>
+
+<?php
+
+} else {
+
+    Session::setMessage('Корзина пуста');
+
+}
+
+
+?>
+

@@ -8,6 +8,209 @@
 
 Class Customers extends Model
 {
+    //Принимает массив с id товаров
+    //Возвращает информацию об этих товарах
+    public function get_products_list_by_ids($ids = array()){
+        if(empty($ids)) {
+            return false;
+        }
+        else {
+            //Готовим список id нужных товаров
+            $id_list = array_shift($ids);
+
+            foreach($ids as $id) {
+                $id = (int)$id;
+                $id_list .= ", " . $id;
+            }
+            
+        $sql = "
+            SELECT `caption`, `price`, `product_id` 
+            FROM `products`
+            WHERE `product_id` IN (".$id_list.")
+        ";
+
+            return $this->db->query($sql);
+        }
+    }
+
+    //Проверяет, есть ли email пользователя в базе
+    public function check_customer_email($email) {
+        $email = $this->db->escape($email);
+
+        $sql = "
+            SELECT `client_id`, `email`
+            FROM `clients`
+            WHERE `email` = '".$email."'
+            LIMIT 1
+            ";
+
+        return $this->db->query($sql);
+    }
+
+    //Принимает данные о пользователе и корзину с количеством каждой позиции
+    //Создаёт нового пользователя и новый заказ
+    public function new_order_new_client($data, $cart){
+        if(!isset($data['name'])
+            || !isset($data['surname'])
+                || !isset($data['email'])
+                || !isset($data['phone'])
+                || !isset($data['address'])
+                || !isset($data['delivery_type'])) {
+            return false;
+        }
+        else if(empty($cart)) return false;
+        else {
+            $name = $this->db->escape($data['name']);
+            $surname = $this->db->escape($data['surname']);
+            $email = $this->db->escape($data['email']);
+            $phone = $this->db->escape($data['phone']);
+            $address = $this->db->escape($data['address']);
+            $delivery_type = $this->db->escape($data['delivery_type']);
+
+            //Получаем идентификатор подключения к БД
+            $connection = $this->db->get_connection();
+
+            //Начало транзакции
+            mysqli_autocommit($connection, false);
+
+            //Создаём пользователя
+            $sql = "
+                INSERT INTO `clients`
+                  (`name`, `surname`, `email`, `phone`)
+                  VALUES ('".$name."','".$surname."','".$email."','".$phone."')
+            ";
+
+            $this->db->query($sql);
+
+            //Получаем id последнего созданного пользователя
+            $sql = "
+                SELECT MAX(`client_id`) FROM `clients` LIMIT 1 
+            ";
+
+            $client_id = $this->db->query($sql);
+            $client_id = $client_id[0]['MAX(`client_id`)'];
+
+            //Создаём заказ
+            $sql = "
+              INSERT INTO `orders`
+              (`client_id`, `user_id`, `status_id`, `delivery_type`, `delivery_adress`)
+              VALUES ('".$client_id."', '0', '1', '".$delivery_type."', '".$address."');
+            ";
+
+            $this->db->query($sql);
+
+            //Получаем id созданного заказа
+            $sql = "
+                SELECT MAX(`order_id`)
+                FROM `orders`
+                LIMIT 1
+            ";
+
+            $order_id = $this->db->query($sql);
+            $order_id = $order_id[0]['MAX(`order_id`)'];
+
+            //Добавляем содержимое корзины
+            foreach ($cart as $item) {
+
+                $product_id = (int)$item['product_id'];
+                $quantity = (int)$item['quantity'];
+
+                $sql = "
+                    INSERT INTO `order_content`
+                    (`order_id`, `product_id`, `quantity`)
+                    VALUES('".$order_id."', '".$product_id."', '".$quantity."')
+                ";
+
+                $this->db->query($sql);
+            }
+
+            //Конец транзакции
+            mysqli_commit($connection);
+            mysqli_autocommit($connection, true);
+
+            return true;
+        }
+    }
+
+    //Принимает данные о пользователе, корзину с количеством каждой позиции и id пользователя
+    //Создаёт новый заказ, обновляет информацию о пользователе
+    public function new_order_old_client($data, $cart, $client_id){
+        if(!isset($data['name'])
+            || !isset($data['surname'])
+            || !isset($data['email'])
+            || !isset($data['phone'])
+            || !isset($data['address'])
+            || !isset($data['delivery_type'])) {
+            return false;
+        }
+        else if(empty($cart)) return false;
+        else if(is_null($client_id)) return false;
+        else {
+            $name = $this->db->escape($data['name']);
+            $surname = $this->db->escape($data['surname']);
+            $phone = $this->db->escape($data['phone']);
+            $address = $this->db->escape($data['address']);
+            $delivery_type = $this->db->escape($data['delivery_type']);
+
+            //Получаем идентификатор подключения к БД
+            $connection = $this->db->get_connection();
+
+            //Начало транзакции
+            mysqli_autocommit($connection, false);
+
+            //Обновляем данные пользователя
+            $sql = "
+                UPDATE `clients`
+                SET `name` = '".$name."',
+                    `surname` = '".$surname."',
+                    `phone` = '".$phone."'
+                WHERE `client_id` = '".$client_id."'
+            ";
+
+            $this->db->query($sql);
+
+            //Создаём заказ
+            $sql = "
+              INSERT INTO `orders`
+              (`client_id`, `user_id`, `status_id`, `delivery_type`, `delivery_adress`)
+              VALUES ('".$client_id."', '0', '1', '".$delivery_type."', '".$address."');
+            ";
+
+            $this->db->query($sql);
+
+            //Получаем id созданного заказа
+            $sql = "
+                SELECT MAX(`order_id`)
+                FROM `orders`
+                LIMIT 1
+            ";
+
+            $order_id = $this->db->query($sql);
+            $order_id = $order_id[0]['MAX(`order_id`)'];
+
+            //Добавляем содержимое корзины
+            foreach ($cart as $item) {
+
+                $product_id = (int)$item['product_id'];
+                $quantity = (int)$item['quantity'];
+
+                $sql = "
+                    INSERT INTO `order_content`
+                    (`order_id`, `product_id`, `quantity`)
+                    VALUES('".$order_id."', '".$product_id."', '".$quantity."')
+                ";
+
+                $this->db->query($sql);
+            }
+
+            //Конец транзакции
+            mysqli_commit($connection);
+            mysqli_autocommit($connection, true);
+
+            return true;
+        }
+    }
+
     //Возвращает 20 клиентов для страницы n
     public function get_clients_page($page){
         $page = (int)$page;

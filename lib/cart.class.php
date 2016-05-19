@@ -17,10 +17,10 @@ class Cart
     //Предварительно данные десериализируются (восстановление начального состояния структуры данных из битовой последовательности)
     function __construct()
     {
-        $this->products = Cookies::get('books') == null ?
+        $this->products = Cookies::get('products') == null ?
             array()
             :
-            unserialize(Cookies::get('books'));
+            unserialize(Cookies::get('products'));
     }
 
     //Get-ер
@@ -35,34 +35,32 @@ class Cart
     {
         $id = (int)$id;
 
-        if (!in_array($id, $this->products)) {
-            array_push($this->products, $id);
-        }
+        array_push($this->products, $id);
 
         //Перед записью, кукисы сериализируются (в нашем случаи превращаются из массива в битовую последовательность)
-        Cookies::set('books', serialize($this->products));
+        Cookies::set('products', serialize($this->products));
     }
 
     //Удаляет товар по id
     public function deleteProduct($id)
     {
         $id = (int)$id;
-
+        
         $key = array_search($id, $this->products);
         if ($key !== false){
             unset($this->products[$key]);
         }
 
-        Cookies::set('books', serialize($this->products));
+        Cookies::set('products', serialize($this->products));
     }
 
     //Очищает корзину
     public function clear()
     {
-        Cookies::delete('books');
+        Cookies::delete('products');
     }
 
-    //Метод проверяет, пуста ли корзинаъ
+    //Метод проверяет, пуста ли корзина
     public function isEmpty()
     {
         return !$this->products;

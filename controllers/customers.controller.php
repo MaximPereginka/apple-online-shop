@@ -15,6 +15,115 @@ Class CustomersController extends Controller
         //Создаём объект модели
         $this->model = new Customers();
     }
+
+    //Выводит покупательскую корзину
+    public function cart(){
+
+        $cart = App::$cart->getProducts();
+        
+        $cart_list = array();
+
+        $length = count($cart);
+
+        //Формируем пары "id товара/количество"
+        while(!empty($cart)){
+            $id = array_shift($cart);
+            $quantity = 1;
+
+            //Ищем товары с таким же id и убираем
+            for($i = 0; $i < $length; $i++) {
+                if(isset($cart[$i])) {
+                    if($id == $cart[$i]) {
+                        $quantity++;
+                        unset($cart[$i]);
+
+                    }
+                }
+            }
+
+            $product = array(
+                "product_id" => $id,
+                "quantity" => $quantity
+            );
+
+            array_push($cart_list, $product);
+        }
+
+        //Возвращаем информацию о нужных товарах
+        $result = $this->model->get_products_list_by_ids(App::$cart->getProducts());
+
+        if($result) {
+            $product_info = $result;
+            
+            $counter = count($product_info);
+
+            //Объединяем информацю в один массив
+            for($i = 0; $i < $counter; $i++) {
+                foreach($cart_list as $cart) {
+                    if($product_info[$i]['product_id'] == $cart['product_id']) {
+                        $product_info[$i]['quantity'] = $cart['quantity'];
+                    }
+                }
+            }
+            $this->data['product_info'] = $product_info;
+        }
+        else {
+            Session::setMessage("Не удалось получить информацию о товарах");
+        }
+
+        //Удаляем товар с корзины
+        if((isset($this->params[0])) && ($this->params[0] == "delete")) {
+            if(isset($this->params[1])) {
+                $id = (int)$this->params[1];
+                App::$cart->deleteProduct($id);
+                Session::setMessage('Товар успешно удалён с корзины');
+                Router::redirect("/customers/cart");
+            }
+        }
+        //Чистим корзину
+        else if((isset($this->params[0])) && ($this->params[0] == "clear")) {
+            App::$cart->clear();
+            Session::setMessage("Корзина очищена");
+            Router::redirect("/main");
+        }
+        else if($_POST) {
+            $result = $this->model->check_customer_email($_POST['email']);
+            if(!$result) {
+                //Добавляем новый заказ и нового пользователя
+                $result = $this->model->new_order_new_client($_POST, $cart_list);
+                if($result) {
+                    Session::setMessage("Заказ успешно оформлен. Наши сотрудники свяжутся с Вами в ближайшее время");
+                    //Чистим корзину
+                    App::$cart->clear();
+                    Router::redirect("/main");
+                }
+                else {
+                    Session::setMessage("Не удалось создать заказ, повторите позже");
+                }
+            }
+            else {
+                $client_id = (int)$result[0]['client_id'];
+                
+                //Добавляем новый заказ к существующему пользователю
+                $result = $this->model->new_order_old_client($_POST, $cart_list, $client_id);
+                if($result) {
+                    Session::setMessage("Заказ успешно оформлен. Наши сотрудники свяжутся с Вами в ближайшее время");
+                    //Чистим корзину
+                    App::$cart->clear();
+                    Router::redirect("/customers/success_page");
+                }
+                else {
+                    Session::setMessage("Не удалось создать заказ, повторите позже");
+                }
+            }
+        }
+    }
+
+    //Страница благодарности
+    public function success_page(){
+        
+    }
+    
     //Методы админки
     //Выводит многостраничный список заказов
     public function administrator_orders(){

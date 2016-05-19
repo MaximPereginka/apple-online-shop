@@ -1,9 +1,48 @@
-<section class="row product-details">
-    <div class="container">
-        <img width="300px" src="<?php echo $data['product']['image']?>" alt="Фото <?php echo $data['product']['caption']?>" />
-        <h2><?php echo $data['product']['caption']?></h2>
-        <p>Цена: <?php echo $data['product']['price']?> грн.</p>
-        <h3>Описание:</h3>
-        <p><?php echo $data['product']['long_description']?></p>
-    </div>
-</section>
+<div class="page-header">
+    <h1><?= $data['product']['caption'] ?></h1>
+</div>
+<div class="row">
+    <img class="img-thumbnail" alt="200x200" src="<?= $data['product']['image'] ?>" style="width: 200px; height: auto;">
+    <p style="margin: 10px 0">
+        <b>Категории: </b>
+
+        <?php foreach($data['product_categories'] as $cat) {
+    ?>
+
+        <a target="_blank" class="btn btn-sm btn-info" href="#"><?= $cat['name'] ?></a>
+
+        <?php
+} ?>
+    </p>
+    <p><b>Цена: </b><?= $data['product']['price'] ?> грн.</p>
+    <p><a href="/products/add_to_cart/<?= $data['product']['product_id'] ?>" class="btn btn-lg btn-danger">Купить</a></p>
+    <h2>Описание</h2>
+    <p><?= $data['product']['long_description']?></p>
+</div>
+<div class="page-header">
+    <h2>Характеристики</h2>
+</div>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Название характеристики</th>
+        <th>Значение</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <?php foreach($data['product_features'] as $features) {
+
+    ?>
+
+    <tr>
+        <td><?= $features['name'] ?></td>
+        <td><?= $features['value'] ?></td>
+    </tr>
+
+    <?php
+
+    } ?>
+
+    </tbody>
+</table>

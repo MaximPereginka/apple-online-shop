@@ -19,6 +19,9 @@ class App
     //Подключение к базе данных
     public static $db;
 
+    //Корзина
+    public static $cart;
+
     //Get-еры
     //Получаем запрос
     public static function getRouter() {
@@ -31,6 +34,8 @@ class App
         self::$router = new Router($uri);
         //Подключаемся к базе данных
         self::$db = new DB(Config::get('db.host'), Config::get('db.user'), Config::get('db.password'), Config::get('db.name'));
+
+        self::$cart = new Cart();
 
         //Загрузка локализации
         Lang::load(self::$router->getLanguage()); 
@@ -84,9 +89,6 @@ class App
             //Если метода не существует - возбуждаем искючегие
             throw new Exception('Method '.$controller_method.' of class '.$controller_class.' does not exist');
         }
-        
-        //Подключение покупательской тележки
-        $cart = new Cart();
         
         //Рендеринг контента
         //Определяем путь к основному шаблону

@@ -36,8 +36,24 @@ class ProductsController extends Controller
         if( isset($params[0]) ) {
             $product_id = strtolower($params[0]);
             $this->data['product'] = $this->model->getProductByID($product_id);
+            $this->data['product_features'] = $this->model->getProductFeatures($product_id);
+            $this->data['product_categories'] = $this->model->getProductCategories($product_id);
         }
         else throw new Exception('Такой страницы не существует');
+    }
+
+    //Добавляет товар в корзину по его id
+    public function add_to_cart(){
+        //Получаем параметры с роутера
+        $params = App::getRouter()->getParams();
+
+        //Проверяем, переданы ли параметры через URL
+        if( isset($params[0]) ) {
+            $product_id = strtolower($params[0]);
+            App::$cart->addProduct($product_id);
+            Router::redirect('/customers/cart');
+        }
+        else throw new Exception('Товара с таким id не существует');
     }
 
     //---------------------- Методы админки -----------------------------

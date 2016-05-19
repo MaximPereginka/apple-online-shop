@@ -1,3 +1,18 @@
 <div class="page-header">
-    <h1>Товары</h1>
+    <h1>Категории товаров</h1>
+</div>
+<div class="main-products-categories">
+    <?php foreach($data['categories'] as $cat) {
+
+    if($cat['has_parent']) continue;
+
+    ?>
+    <a href="#">
+        <img class="img-thumbnail" alt="200x200" src="<?= $cat['img'] ?>" style="width: 200px;">
+        <h2><?= $cat['name'] ?></h2>
+    </a>
+
+    <?php
+
+} ?>
 </div>
