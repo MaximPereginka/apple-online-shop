@@ -132,13 +132,8 @@ Class CustomersController extends Controller
             if(isset($this->params[1])) {
                 $result = $this->model->delete_order($this->params[1]);
 
-                if($result) {
-                    Session::setMessage("Заказ успешно удалён");
-                    Router::redirect("/administrator/customers/orders");
-                }
-                else {
-                    Session::setMessage("Ошибка удаления заказа");
-                }
+                Session::setMessage("Заказ успешно удалён");
+                Router::redirect("/administrator/customers/orders");
             }
         }
 
