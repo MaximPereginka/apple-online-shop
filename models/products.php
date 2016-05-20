@@ -156,7 +156,7 @@ class Products extends Model
         $sql = "
             SELECT *
             FROM products
-            WHERE `caption` LIKE '%".$name."%'
+            WHERE `caption` LIKE '%".$name."%' AND `is_published` = '1'
         ";
         
         //Выполняем запрос
