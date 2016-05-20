@@ -95,7 +95,7 @@ Class CustomersController extends Controller
                     Session::setMessage("Заказ успешно оформлен. Наши сотрудники свяжутся с Вами в ближайшее время");
                     //Чистим корзину
                     App::$cart->clear();
-                    Router::redirect("/main");
+                    Router::redirect("/customers/success_page");;
                 }
                 else {
                     Session::setMessage("Не удалось создать заказ, повторите позже");
