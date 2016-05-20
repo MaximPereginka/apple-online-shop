@@ -31,6 +31,11 @@
     <h1>Добро пожаловать</h1>
     <p>Наш магазин предоставляет только качественные товары по самым доступным на рынке ценам. Не теряй времени и <a href="/products">выбери</a> себе что-нибудь по вкусу</p>
 </div>
+
+<?php if(!empty($data['popular'])) {
+
+?>
+
 <div class="page-header">
     <h2>Популярные товары</h2>
 </div>
@@ -40,15 +45,19 @@
 
             ?>
 
-                <div class="col-md-2">
-                    <img src="<?= $product['image'] ?>" class="thumbnail" height="100px" alt="<?= $product['caption'] ?>"/>
-                    <p><a target="_blank" href="/products/view/<?= $product['product_id'] ?>"><?= $product['caption'] ?></a></>
-                    <p><b>Цена: </b><?= $product['price'] ?></p>
-                    <a class="btn btn-danger" target="_blank" href="/products/add_to_cart/<?= $product['product_id'] ?>">Купить</a>
-                </div>
+    <div class="col-md-2">
+        <img src="<?= $product['image'] ?>" class="thumbnail" height="100px" alt="<?= $product['caption'] ?>"/>
+        <p><a target="_blank" href="/products/view/<?= $product['product_id'] ?>"><?= $product['caption'] ?></a></>
+        <p><b>Цена: </b><?= $product['price'] ?></p>
+        <a class="btn btn-danger" target="_blank" href="/products/add_to_cart/<?= $product['product_id'] ?>">Купить</a>
+    </div>
 
-            <?php
+    <?php
 
         }
     ?>
 </div>
+
+<?php
+
+}?>
