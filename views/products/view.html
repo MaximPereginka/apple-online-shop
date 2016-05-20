@@ -46,3 +46,24 @@
 
     </tbody>
 </table>
+<div class="page-header">
+    <h2>Популярные товары</h2>
+</div>
+<div class="row">
+    <?php
+        foreach($data['popular'] as $product) {
+
+            ?>
+
+    <div class="col-md-2">
+        <img src="<?= $product['image'] ?>" class="thumbnail" height="100px" alt="<?= $product['caption'] ?>"/>
+        <p><a target="_blank" href="/products/view/<?= $product['product_id'] ?>"><?= $product['caption'] ?></a></>
+        <p><b>Цена: </b><?= $product['price'] ?></p>
+        <a class="btn btn-danger" target="_blank" href="/products/add_to_cart/<?= $product['product_id'] ?>">Купить</a>
+    </div>
+
+    <?php
+
+        }
+    ?>
+</div>

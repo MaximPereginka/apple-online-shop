@@ -9,13 +9,13 @@
     </ol>
     <div class="carousel-inner" role="listbox">
         <div class="item">
-            <img alt="First slide" src="http://reading-tablet.website/img/s4.png">
+            <a href="/products/category/20"><img alt="First slide" src="http://reading-tablet.website/img/s4.png"></a>
         </div>
         <div class="item">
-            <img alt="Second slide" src="http://www.indexasphalt.pt/media/wysiwyg/iphone-se_01-1.jpg">
+            <a href="/products/category/19"><img alt="Second slide" src="http://www.indexasphalt.pt/media/wysiwyg/iphone-se_01-1.jpg"></a>
         </div>
         <div class="item active">
-            <img alt="Third slide" src="http://www.abraxasnu.com/wp-content/uploads/2014/09/apple-watch-72dpi.jpg">
+            <a href="/products/category/24"><img alt="Third slide" src="http://www.abraxasnu.com/wp-content/uploads/2014/09/apple-watch-72dpi.jpg"></a>
         </div>
     </div>
     <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
@@ -26,4 +26,25 @@
         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
+</div>
+<div class="page-header">
+    <h2>Популярные товары</h2>
+</div>
+<div class="row">
+    <?php
+        foreach($data['popular'] as $product) {
+
+            ?>
+
+                <div class="col-md-2">
+                    <img src="<?= $product['image'] ?>" class="thumbnail" height="100px" alt="<?= $product['caption'] ?>"/>
+                    <p><a target="_blank" href="/products/view/<?= $product['product_id'] ?>"><?= $product['caption'] ?></a></>
+                    <p><b>Цена: </b><?= $product['price'] ?></p>
+                    <a class="btn btn-danger" target="_blank" href="/products/add_to_cart/<?= $product['product_id'] ?>">Купить</a>
+                </div>
+
+            <?php
+
+        }
+    ?>
 </div>

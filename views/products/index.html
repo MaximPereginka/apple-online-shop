@@ -1,18 +1,67 @@
 <div class="page-header">
     <h1>Категории товаров</h1>
 </div>
-<div class="main-products-categories">
-    <?php foreach($data['categories'] as $cat) {
+<div class="main-products-categories row">
+    <?php
 
-    if($cat['has_parent']) continue;
+    $counter = count($data['categories']);
+
+    for($i = 0; $i < $counter; $i+=6) {
+
+        ?>
+
+    <div class="col-md-12">
+
+        <?php
+
+            for($k = $i; $k < $i + 6; $k++) {
+
+                if(isset($data['categories'][$k])) {
+
+                ?>
+
+                <div class="col-md-2">
+                    <a href="/products/category/<?= $data['categories'][$k]['category_id'] ?>">
+                        <p style="text-align: center"><img class="img-thumbnail" alt="100x100" src="<?= $data['categories'][$k]['img'] ?>" style="width: 100px;"></p>
+                        <p style="text-align: center"><b><?= $data['categories'][$k]['name'] ?></b></p>
+                    </a>
+                </div>
+
+                <?php
+
+                }
+
+            }
+
+        ?>
+
+    </div>
+
+        <?php
+
+    }
 
     ?>
-    <a href="#">
-        <img class="img-thumbnail" alt="200x200" src="<?= $cat['img'] ?>" style="width: 200px;">
-        <h2><?= $cat['name'] ?></h2>
-    </a>
+
+</div>
+<div class="page-header">
+    <h2>Популярные товары</h2>
+</div>
+<div class="row">
+    <?php
+        foreach($data['popular'] as $product) {
+
+            ?>
+
+    <div class="col-md-2">
+        <img src="<?= $product['image'] ?>" class="thumbnail" height="100px" alt="<?= $product['caption'] ?>"/>
+        <p><a target="_blank" href="/products/view/<?= $product['product_id'] ?>"><?= $product['caption'] ?></a></>
+        <p><b>Цена: </b><?= $product['price'] ?></p>
+        <a class="btn btn-danger" target="_blank" href="/products/add_to_cart/<?= $product['product_id'] ?>">Купить</a>
+    </div>
 
     <?php
 
-} ?>
+        }
+    ?>
 </div>

@@ -24,6 +24,24 @@ class Products extends Model
         return isset($result[0]) ? $result : null;
     }
 
+    //Метод возвращает не более 6 самых популярных товаров
+    public function get_popular_products(){
+        $sql = "
+            SELECT SUM(`order_content`.`quantity`) as `popularity`, `products`.`image`,
+             `products`.`caption`,`products`.`product_id`,  `products`.`price`
+            FROM `order_content`, `products`
+            WHERE `order_content`.`product_id` = `products`.`product_id`
+            GROUP BY `order_content`.`product_id`
+            ORDER BY `popularity` DESC
+            LIMIT 6
+            ";
+
+        //Выполняем запрос
+        $result = $this->db->query($sql);
+        //Возвращаем результат запроса или null
+        return isset($result[0]) ? $result : null;
+    }
+    
     //Принимает ID товара
     //Возвращает все особенности товара и их значения
     public function getProductFeatures($id){
@@ -70,6 +88,18 @@ class Products extends Model
         return isset($result[0]) ? $result : null;
     }
 
+    //Метод возвращает корневые категории товаров магазина
+    public function getRootCategoriesList(){
+        //SQL Запрос
+        $sql = "SELECT * FROM apple_store.categories WHERE `has_parent` = '0'
+        ";
+
+        //Выполняем запрос
+        $result = $this->db->query($sql);
+        //Возвращаем результат запроса или null
+        return isset($result[0]) ? $result : null;
+    }
+
     //Метод возвращает все возможные особенности товаров магазина
     public function getFeaturesList(){
         //SQL Запрос
@@ -83,8 +113,43 @@ class Products extends Model
         return isset($result[0]) ? $result : null;
     }
 
+    //Принимает ID категории
+    //Возвращает имя категории
+    public function get_category_name($category_id = ''){
+        $category_id = (int)$category_id;
+
+        $sql = "
+            SELECT `name`
+            FROM `categories`
+            WHERE `category_id` = '".$category_id."'
+            LIMIT 1
+        ";
+
+        //Выполняем запрос
+        $result = $this->db->query($sql);
+        //Возвращаем результат запроса или null
+        return isset($result[0]) ? $result : null;
+    }
+
+    //Принимает ID категории
+    //Метод возвращает всех непосредственных потомков данной категории
+    public function get_child_categories($category_id = ''){
+        $category_id = (int)$category_id;
+
+        $sql = "
+            SELECT *
+            FROM `categories`
+            WHERE `parent_id` = '".$category_id."'
+        ";
+
+        //Выполняем запрос
+        $result = $this->db->query($sql);
+        //Возвращаем результат запроса или null
+        return isset($result[0]) ? $result : null;
+    }
+
     //Принимает ID категории товаров
-    //Метод возвращает массив со всеми товарами данной категории
+    //Метод возвращает массив со всеми опубликованными товарами данной категории
     public function getProductsByCategory($category_id = ''){
         //Немного безопасности
         $category_id = (int)$category_id;
@@ -92,13 +157,14 @@ class Products extends Model
         //SQL Запрос
         $sql = "SELECT products.*
                 FROM products, product_category, categories
-                WHERE categories.category_id = 1 
+                WHERE categories.category_id = '".$category_id."' 
                     AND categories.category_id = product_category.category_id
                         AND product_category.product_id = products.product_id
+                            AND products.is_published = '1'
         ";
 
         //Выполняем запрос
-        $result = $this->db->   query($sql);
+        $result = $this->db->query($sql);
         //Возвращаем результат запроса или null
         return isset($result[0]) ? $result : null;
     }

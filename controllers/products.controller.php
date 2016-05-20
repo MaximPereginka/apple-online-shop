@@ -22,9 +22,8 @@ class ProductsController extends Controller
     //Выводит список базовых категорий товаров
     public function index() {
         //Получаем данные с модели
-        $this->data['categories'] = $this->model->getCategoriesList();
-        //Получаем список категорий
-        //См. админку
+        $this->data['categories'] = $this->model->getRootCategoriesList();
+        $this->data['popular'] = $this->model->get_popular_products();
     }
 
     //Метод отвечает за просмотр отдельных товаров
@@ -38,10 +37,22 @@ class ProductsController extends Controller
             $this->data['product'] = $this->model->getProductByID($product_id);
             $this->data['product_features'] = $this->model->getProductFeatures($product_id);
             $this->data['product_categories'] = $this->model->getProductCategories($product_id);
+            $this->data['popular'] = $this->model->get_popular_products();
         }
         else throw new Exception('Такой страницы не существует');
     }
 
+    //Метод выводит подкатегории даной категории а так же товары этой категории
+    public function category(){
+        if(isset($this->params[0])) {
+            $this->data['current_category'] = $this->model->get_category_name($this->params[0]);
+            $this->data['categories'] = $this->model->get_child_categories($this->params[0]);
+            $this->data['products'] = $this->model->getProductsByCategory($this->params[0]);
+
+        }
+        else Session::setMessage("Такой страницы не существует");
+    }
+    
     //Добавляет товар в корзину по его id
     public function add_to_cart(){
         //Получаем параметры с роутера

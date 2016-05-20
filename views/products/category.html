@@ -1,0 +1,99 @@
+<div class="page-header">
+    <h1>Категория &#171;<?= $data['current_category'][0]['name']?>&#187;</h1>
+</div>
+
+<?php
+
+    if(!empty($data['categories'])){
+
+    ?>
+
+<div class="row">
+    <?php
+
+    $counter = count($data['categories']);
+
+    for($i = 0; $i < $counter; $i+=6) {
+
+        ?>
+
+    <div class="col-md-12">
+
+        <?php
+
+            for($k = $i; $k < $i + 6; $k++) {
+
+                if(isset($data['categories'][$k])) {
+
+                ?>
+
+        <div class="col-md-2">
+            <a href="/products/category/<?= $data['categories'][$k]['category_id'] ?>">
+                <p style="text-align: center"><img class="img-thumbnail" alt="100x100" src="<?= $data['categories'][$k]['img'] ?>" style="width: 100px;"></p>
+                <p style="text-align: center"><b><?= $data['categories'][$k]['name'] ?></b></p>
+            </a>
+        </div>
+
+        <?php
+
+                }
+
+            }
+
+        ?>
+
+    </div>
+
+    <?php
+
+    }
+
+    ?>
+
+</div>
+
+    <?php
+
+    }
+
+?>
+
+
+<?php
+
+    if(!empty($data['products'])){
+
+    ?>
+
+        <div class="page-header">
+            <h2>Товары категории</h2>
+        </div>
+
+        <?php
+            foreach($data['products'] as $product) {
+
+            ?>
+
+                <div style="margin-bottom: 20px" class="row">
+                    <div class="col-md-2">
+                        <img class="img-thumbnail" alt="100x100" src="<?= $product['image'] ?>" style="width: 150px;">
+                    </div>
+                    <div class="col-md-10">
+                        <h3><a target="_blank" href="/products/view/<?= $product['product_id'] ?>"><?= $product['caption'] ?></a></h3>
+                        <p><b>Цена: </b><?= $product['price'] ?> грн.</p>
+                        <p><a class="btn btn-danger" href="/products/add_to_cart/<?= $product['product_id'] ?>" target="_blank">Добавить в корзину</a></p>
+                        <h4>Описание</h4>
+                        <p><?= $product['short_description'] ?></p>
+                    </div>
+                </div>
+
+        <?php
+
+            }
+
+    }
+    else {
+        Session::setMessage("В даной категории нет товаров");
+    }
+
+?>

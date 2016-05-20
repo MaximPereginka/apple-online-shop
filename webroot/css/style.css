@@ -23,7 +23,8 @@ footer.main-footer {
   height: 150px;
   position: fixed;
   bottom: 0;
-  z-index: 16; }
+  z-index: 16;
+  opacity: 0.9; }
 
 /*======================= CONTROL PANEL STYLES =======================*/
 /*------------------------- Colors -----------------------------*/
