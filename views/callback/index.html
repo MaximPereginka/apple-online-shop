@@ -3,11 +3,12 @@
         <h1>Обратная связь</h1>
     </div>
     <div style="margin: 0 auto 20px" class="col-md-6">
-        <form class="callback-form" action="" method="post">
+        <form name="callback_form" class="callback-form" action="" method="post">
+            <p id="alert" style="font-style: italic; display: none; color: #aa0000">text</p>
             <input class="form-control" name="name" type="text" placeholder="Ваше имя" required><br>
             <input class="form-control" name="email" type="email" placeholder="Ваш email" required><br>
             <textarea class="form-control" name="message" placeholder="Ваше сообщение" required></textarea><br>
-            <input class="btn btn-lg btn-success btn-block" type="submit" value="Отправить">
+            <input onclick="return validate_callback()" class="btn btn-lg btn-success btn-block" type="submit" value="Отправить">
         </form>
     </div>
     <div style="margin: 0 auto 20px" class="col-md-6">

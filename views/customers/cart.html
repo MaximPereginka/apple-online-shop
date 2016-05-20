@@ -54,7 +54,8 @@
 </div>
 
 <div class="row">
-    <form class="callback-form" style="max-width: 400px" action="" method="post">
+    <form name="customer_form" class="callback-form" style="max-width: 400px" action="" method="post">
+        <p id="alert" style="font-style: italic; display: none; color: #aa0000">text</p>
         <input id="name" name="name" class="form-control" type="text" placeholder="Ваше имя" required>
         <br/>
         <input id="surname" name="surname" class="form-control" type="text" placeholder="Ваща фамилия" required>
@@ -71,7 +72,7 @@
             <option>Самовывоз</option>
         </select>
         <br/>
-        <input class="btn btn-info btn-block" type="submit" value="Оформить заказ">
+        <input onclick="return validate_customer()" class="btn btn-info btn-block" type="submit" value="Оформить заказ">
     </form>
 </div>
 
