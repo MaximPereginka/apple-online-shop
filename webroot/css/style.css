@@ -16,6 +16,7 @@ html, body {
   height: 100%; }
 
 /* domain/main page */
+/* sticky footer */
 .main-footer {
   padding: 20px 0;
   background: #eee;
@@ -25,6 +26,13 @@ html, body {
 .global-container {
   min-height: 100%;
   padding-bottom: 180px; }
+
+.search-form input {
+  display: inline-block;
+  width: auto; }
+.search-form input[type='submit'] {
+  position: relative;
+  top: -1px; }
 
 /*======================= CONTROL PANEL STYLES =======================*/
 /*------------------------- Colors -----------------------------*/

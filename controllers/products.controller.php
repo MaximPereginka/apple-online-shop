@@ -56,6 +56,16 @@ class ProductsController extends Controller
         else Session::setMessage("Такой страницы не существует");
     }
     
+    //Ищет товары по названию
+    public function search(){
+        if(isset($_POST['search'])){
+            $this->data['products'] = $this->model->search_product($_POST['search']);
+        }
+        else {
+            Session::setMessage("Введите название товара");
+        }
+    }
+    
     //Добавляет товар в корзину по его id
     public function add_to_cart(){
         //Получаем параметры с роутера

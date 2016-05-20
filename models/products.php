@@ -148,6 +148,23 @@ class Products extends Model
         return isset($result[0]) ? $result : null;
     }
 
+    //Принимает строку
+    //Ищет товары по их названиях
+    public function search_product($name){
+        $name = $this->db->escape($name);
+        
+        $sql = "
+            SELECT *
+            FROM products
+            WHERE `caption` LIKE '%".$name."%'
+        ";
+        
+        //Выполняем запрос
+        $result = $this->db->query($sql);
+        //Возвращаем результат запроса или null
+        return isset($result[0]) ? $result : null;
+    }
+
     //Принимает ID категории товаров
     //Метод возвращает массив со всеми опубликованными товарами данной категории
     public function getProductsByCategory($category_id = '', $sort = ""){

@@ -1,0 +1,48 @@
+<div class="page-header">
+    <h1>Поиск</h1>
+</div>
+<form class="search-form" action="" method="post">
+    <p>
+        <input type="search" name="search" class="form-control" placeholder="Введите название товара" required>
+        <input type="submit" value="Поиск" class="btn btn-info">
+    </p>
+</form>
+<h2 style="margin-bottom: 20px">Результаты поиска:</h2>
+<?php
+
+    if(!empty($data['products'])){
+
+    ?>
+
+
+<?php
+            foreach($data['products'] as $product) {
+
+            ?>
+
+<div style="margin-bottom: 20px" class="col-md-12">
+    <div class="col-md-2">
+        <img class="img-thumbnail" alt="100x100" src="<?= $product['image'] ?>" style="width: 150px;">
+    </div>
+    <div class="col-md-10">
+        <h3><a target="_blank" href="/products/view/<?= $product['product_id'] ?>"><?= $product['caption'] ?></a></h3>
+        <p><b>Цена: </b><?= $product['price'] ?> грн.</p>
+        <p><a class="btn btn-danger" href="/products/add_to_cart/<?= $product['product_id'] ?>" target="_blank">Добавить в корзину</a></p>
+        <h4>Описание</h4>
+        <p><?= $product['short_description'] ?></p>
+    </div>
+</div>
+
+<?php
+
+            }
+
+    }
+    else {
+
+        ?>
+            <p>По данному запросу ничего не найдено</p>
+        <?php
+
+    }
+?>
