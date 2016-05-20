@@ -65,12 +65,14 @@
                         </li>
                         <li class="<?php if(App::getRouter()->getController() == "callback") echo "active" ?>"><a href="/callback">Обратная связь</a></li>
                         <li class="<?php if(App::getRouter()->getController() == "customers") echo "active" ?>"><a style="padding: 14px 15px 7px !important" href="/customers/cart"><i class="material-icons">add_shopping_cart</i></a></li>
-                        <li><form class="search-form" action="/products/search" method="post">
-                            <p style="margin: 9px 0 7px">
-                                <input type="search" name="search" class="form-control" placeholder="Введите название товара" required>
-                                <input type="submit" value="Поиск" class="btn btn-info">
-                            </p>
-                        </form></li>
+                        <li style="padding: 0 5px">
+                            <form class="search-form" action="/products/search" method="post">
+                                <p style="margin: 9px 0 7px">
+                                    <input type="search" name="search" class="form-control" placeholder="Введите название товара" required>
+                                    <input type="submit" value="Поиск" class="btn btn-info">
+                                </p>
+                         </form>
+                        </li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
