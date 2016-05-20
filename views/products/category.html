@@ -69,12 +69,19 @@
             <h2>Товары категории</h2>
         </div>
 
+        <div class="col-md-12">
+            <p><b>Сортировка: </b>
+                <a href="/products/category/<?= $data['current_category'][0]['category_id']?>/expensive"> сначала дорогие</a>
+                <a href="/products/category/<?= $data['current_category'][0]['category_id']?>/cheap"> сначала дешёвые</a>
+            </p>
+        </div>
+
         <?php
             foreach($data['products'] as $product) {
 
             ?>
 
-                <div style="margin-bottom: 20px" class="row">
+                <div style="margin-bottom: 20px" class="col-md-12">
                     <div class="col-md-2">
                         <img class="img-thumbnail" alt="100x100" src="<?= $product['image'] ?>" style="width: 150px;">
                     </div>

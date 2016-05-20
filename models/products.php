@@ -119,7 +119,7 @@ class Products extends Model
         $category_id = (int)$category_id;
 
         $sql = "
-            SELECT `name`
+            SELECT `name`, `category_id`
             FROM `categories`
             WHERE `category_id` = '".$category_id."'
             LIMIT 1
@@ -150,9 +150,19 @@ class Products extends Model
 
     //Принимает ID категории товаров
     //Метод возвращает массив со всеми опубликованными товарами данной категории
-    public function getProductsByCategory($category_id = ''){
+    public function getProductsByCategory($category_id = '', $sort = ""){
         //Немного безопасности
         $category_id = (int)$category_id;
+
+        $sort = $this->db->escape($sort);
+
+        switch($sort) {
+            case "cheap": $sort = "ORDER BY `products`.`price` ASC";
+                break;
+            case "expensive": $sort = "ORDER BY `products`.`price` DESC";
+                break;
+            default: $sort = "";
+        }
 
         //SQL Запрос
         $sql = "SELECT products.*
@@ -161,6 +171,7 @@ class Products extends Model
                     AND categories.category_id = product_category.category_id
                         AND product_category.product_id = products.product_id
                             AND products.is_published = '1'
+                ".$sort."
         ";
 
         //Выполняем запрос

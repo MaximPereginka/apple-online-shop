@@ -49,6 +49,9 @@ class ProductsController extends Controller
             $this->data['categories'] = $this->model->get_child_categories($this->params[0]);
             $this->data['products'] = $this->model->getProductsByCategory($this->params[0]);
 
+            if(isset($this->params[1])){
+                $this->data['products'] = $this->model->getProductsByCategory($this->params[0], $this->params[1]);
+            }
         }
         else Session::setMessage("Такой страницы не существует");
     }
