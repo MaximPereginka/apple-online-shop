@@ -6,25 +6,25 @@
   /* ├Р╦Ь├Р┬╝├С┬П ├С╦Ж├СтВм├Р┬╕├СтАЮ├СтАЪ├Р┬░ */
   src: url(../fonts/RonduitCapitals-Light.otf);
   /* ├Р┼╕├С╞Т├СтАЪ├С┼Т ├Р┬║ ├СтАЮ├Р┬░├Р┬╣├Р┬╗├С╞Т ├С┬Б├Р┬╛ ├С╦Ж├СтВм├Р┬╕├СтАЮ├СтАЪ├Р┬╛├Р┬╝ */ }
-.main-empty {
-  height: 200px; }
-
 /* domain/callback page */
 .callback-form {
   max-width: 500px; }
   .callback-form textarea {
     height: 100px; }
 
+html, body {
+  height: 100%; }
+
 /* domain/main page */
-footer.main-footer {
-  margin: 20px 0 0;
+.main-footer {
   padding: 20px 0;
   background: #eee;
   height: 150px;
-  position: fixed;
-  bottom: 0;
-  z-index: 16;
-  opacity: 0.9; }
+  margin: -150px 0 0; }
+
+.global-container {
+  min-height: 100%;
+  padding-bottom: 180px; }
 
 /*======================= CONTROL PANEL STYLES =======================*/
 /*------------------------- Colors -----------------------------*/
